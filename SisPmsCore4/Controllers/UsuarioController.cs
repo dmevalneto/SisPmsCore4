@@ -33,6 +33,7 @@ namespace SisPmsCore4.Controllers
             {
                 HttpContext.Session.SetString("NomeUsuarioLogado", usuario.Nome);
                 HttpContext.Session.SetString("IdUsuarioLogado", usuario.IdUsuario.ToString());
+                HttpContext.Session.SetString("IdSetorUsuarioLogado", usuario.setorid.ToString());
                 return RedirectToAction("Index", "Home");
             }
             else

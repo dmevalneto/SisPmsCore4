@@ -1,11 +1,10 @@
-﻿@model Setor
+﻿@model Cargo
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_LayoutSp.cshtml";
 }
 
-
-<h2 class="text-center text-info">Setor</h2>
+<h2 class="text-center text-info">Cargo</h2>
 <hr />
 <p>
     @*<a class="btn btn-default" asp-action="Create">Novo Registro</a>*@
@@ -16,34 +15,34 @@
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.idSetor)
+                    @Html.DisplayNameFor(model => model.idCargo)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Nome)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Gestor)
+                    @Html.DisplayNameFor(model => model.Descricao)
                 </th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in (List<Setor>)ViewBag.ListaSetor)
+            @foreach (var item in (List<Cargo>)ViewBag.ListaCargo)
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.idSetor)
+                        @Html.DisplayFor(modelItem => item.idCargo)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Nome)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Gestor)
+                        @Html.DisplayFor(modelItem => item.Descricao)
                     </td>
                     <td>
-                        @Html.ActionLink("Editar", "Edit", new { id = item.idSetor }, new { @class = "btn btn-success" }) |
-                        @Html.ActionLink("Detalhes", "Details", new { id = item.idSetor }, new { @class = "btn btn-secondary" }) |
-                        @Html.ActionLink("Deletar", "Delete", new { id = item.idSetor }, new { @class = "btn btn-danger" })
+                        @Html.ActionLink("Editar", "Edit", new { id = item.idCargo }, new { @class = "btn btn-success" }) |
+                        @Html.ActionLink("Detalhes", "Details", new { id = item.idCargo }, new { @class = "btn btn-secondary" }) |
+                        @Html.ActionLink("Deletar", "Delete", new { id = item.idCargo }, new { @class = "btn btn-danger" })
                     </td>
                 </tr>
             }
@@ -54,6 +53,7 @@
 
 <script>
     function NovoRegistro() {
-        window.location.href = "../Setor/Create";
+        window.location.href = "../Cargo/Create";
     }
 </script>
+

@@ -1,0 +1,106 @@
+﻿
+@{
+    ViewData["Title"] = "Encaminhar";
+    Layout = "~/Views/Shared/_LayoutSp.cshtml";
+}
+
+<h2>@TempData["idColaborador"]</h2>
+
+
+<div class="table-responsive">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                @*<th>
+                        @Html.DisplayNameFor(model => model.idSetor)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Codigo)
+                    </th>*@
+                <th>
+                    Nome
+                </th>
+                @*<th>
+                        @Html.DisplayNameFor(model => model.Telefone1)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Telefone2)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Cep)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Bairro)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Logradouro)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Numero)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Latitude)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Longitude)
+                    </th>*@
+                <th>
+                    Gestor
+                </th>
+                @*<th>
+                        @Html.DisplayNameFor(model => model.tipo_setor_idtipo_setor)
+                    </th>*@
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in (List<Setor>)ViewBag.ListaSetor)
+            {
+                <tr>
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.idSetor)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Codigo)
+                        </td>*@
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nome)
+                    </td>
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.Telefone1)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Telefone2)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Cep)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Bairro)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Logradouro)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Numero)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Latitude)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Longitude)
+                        </td>*@
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Gestor)
+                    </td>
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.tipo_setor_idtipo_setor)
+                        </td>*@
+                    <td>
+                        @Html.ActionLink("Selecionar", "FinalizarEncaminhamento", new { id = item.idSetor }, new { @class = "btn btn-primary" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

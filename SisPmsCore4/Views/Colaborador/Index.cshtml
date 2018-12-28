@@ -1,0 +1,30 @@
+﻿@model Colaborador
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutSp.cshtml";
+}
+
+<form asp-action="FiltrarColaborador">
+    <div class="input-group mb-3">
+        <input asp-for="Nome" type="text" class="form-control" placeholder="Digite o nome do colaborador" aria-label="Recipient's username" aria-describedby="basic-addon2">
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="submit">Localizar</button>
+        </div>
+    </div>
+</form>
+<br />
+<ul class="nav justify-content-center">
+    <li class="nav-item">
+        <a class="nav-link" asp-area="" asp-controller="Colaborador" asp-action="Create">Add Novo</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" asp-area="" asp-controller="" asp-action="">Localizar por Setor</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" asp-area="" asp-controller="" asp-action="">Localizar por Cargo</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" asp-area="" asp-controller="" asp-action="">Localizar por Ocorrência</a>
+    </li>
+</ul>
+

@@ -34,6 +34,7 @@ namespace SisPmsCore4.Models
                 {
                     IdUsuario = int.Parse(dt.Rows[0]["idusuario"].ToString());
                     Nome = (dt.Rows[0]["nome"].ToString());
+                    setorid =int.Parse((dt.Rows[0]["setor_idsetor"].ToString()));
                     // Data = (dt.Rows[0]["data"].ToString());
                     return true;
                 }

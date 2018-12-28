@@ -1,0 +1,88 @@
+﻿@model Colaborador
+@{
+    ViewData["Title"] = "FiltrarColaborador";
+    Layout = "~/Views/Shared/_LayoutSp.cshtml";
+}
+
+<form asp-action="FiltrarColaborador">
+    <div class="input-group mb-3">
+        <input asp-for="Nome" type="text" class="form-control" placeholder="Digite o nome do colaborador" aria-label="Recipient's username" aria-describedby="basic-addon2">
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="submit">Localizar</button>
+        </div>
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cpf)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataAdmissao)
+            </th>
+            <th>
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.Telefone)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.setor_idsetor)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.cargo_idcargo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ocorrencia_idocorrencia)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.prestadora_servico_idprestadora_servico)
+                </th>*@
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in (List<Colaborador>)ViewBag.FiltrarColaborador)
+        {
+            <tr>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.idColaborador)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cpf)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataAdmissao)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.Telefone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.setor_idsetor)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.cargo_idcargo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ocorrencia_idocorrencia)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.prestadora_servico_idprestadora_servico)
+                    </td>*@
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = item.idColaborador }, new { @class = "btn btn-success" }) |
+                    @Html.ActionLink("Detalhes", "Details", new { /* id=item.PrimaryKey */ }, new { @class = "btn btn-secondary" }) |
+                    @Html.ActionLink("Deletar", "Delete", new { id = item.idColaborador }, new { @class = "btn btn-danger" }) |
+                    @Html.ActionLink("Encaminhar", "Encaminhar", new { id = item.idColaborador }, new { @class = "btn btn-dark" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

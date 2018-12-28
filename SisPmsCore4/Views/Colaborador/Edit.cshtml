@@ -1,0 +1,106 @@
+﻿@model Colaborador
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_LayoutSp.cshtml";
+}
+
+<br />
+<form asp-action="Edit">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-2">
+                <div class="form-group">
+                    <label asp-for="idColaborador" class="control-label"></label>
+                    <input asp-for="idColaborador" class="form-control" readonly />
+                    <span asp-validation-for="idColaborador" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-10">
+                <div class="form-group">
+                    <label asp-for="Nome" class="control-label"></label>
+                    <input asp-for="Nome" class="form-control" />
+                    <span asp-validation-for="Nome" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <div class="form-group">
+                    <label asp-for="Cpf" class="control-label"></label>
+                    <input asp-for="Cpf" class="form-control" />
+                    <span asp-validation-for="Cpf" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="form-group">
+                    <label asp-for="DataAdmissao" class="control-label"></label>
+                    <input asp-for="DataAdmissao" class="form-control" />
+                    <span asp-validation-for="DataAdmissao" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="form-group">
+                    <label asp-for="Telefone" class="control-label"></label>
+                    <input asp-for="Telefone" class="form-control" />
+                    <span asp-validation-for="Telefone" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                <div class="form-group">
+                    <label asp-for="setor_idsetor" class="control-label">Setor</label>
+                    <select class="form-control" asp-for="setor_idsetor">
+                        @{
+                            foreach (var item in (List<Setor>)ViewBag.ListaSetor)
+                            {
+                                <option value="@item.idSetor">@item.Nome</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="form-group">
+                    <label asp-for="cargo_idcargo" class="control-label">Cargo</label>
+                    <select class="form-control" asp-for="cargo_idcargo">
+                        @{
+                            foreach (var item in (List<Cargo>)ViewBag.ListaCargo)
+                            {
+                                <option value="@item.idCargo">@item.Nome</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="form-group">
+                    <label asp-for="ocorrencia_idocorrencia" class="control-label">Ocorrência</label>
+                    <select class="form-control" asp-for="ocorrencia_idocorrencia">
+                        @{
+                            foreach (var item in (List<Ocorrencia>)ViewBag.ListaOcorrencia)
+                            {
+                                <option value="@item.idOcorrencia">@item.Numero</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="form-group">
+                    <label asp-for="prestadora_servico_idprestadora_servico" class="control-label">Prestadora de Serviço</label>
+                    <select class="form-control" asp-for="prestadora_servico_idprestadora_servico">
+                        @{
+                            foreach (var item in (List<PrestadoraServico>)ViewBag.ListaPrestadoraServico)
+                            {
+                                <option value="@item.idPrestadoraServico">@item.RazaoSocial</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-block btn-success">Atualizar Dados</button>
+        </div>
+    </div>
+</form>
