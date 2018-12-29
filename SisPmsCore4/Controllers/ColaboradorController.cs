@@ -58,8 +58,12 @@ namespace SisPmsCore4.Controllers
 
         public ActionResult CartaEncaminhamento()
         {
-            CartaEncaminhamento objEncaminhamento = new CartaEncaminhamento();
-            ViewBag.ListaEncaminhamento = objEncaminhamento.RetornaCartaEncaminhamento();
+            ViewBag.idColaborador = TempData["idColaborador"].ToString();
+            CartaEncaminhamento objEncaminhamento = new CartaEncaminhamento(HttpContextAccessor);
+            ViewBag.ListaEncaminhamento = objEncaminhamento.RetornaCartaEncaminhamento(ViewBag.idColaborador);
+
+            //CartaEncaminhamento objEncaminhamento = new CartaEncaminhamento(HttpContextAccessor);
+            //ViewBag.ListaEncaminhamento = objEncaminhamento.RetornaCartaEncaminhamento();
             return View();
         }
 

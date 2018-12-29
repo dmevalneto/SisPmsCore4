@@ -5,7 +5,7 @@
 }
 
 
-
+<h1>@ViewBag.idColaborador</h1>
 <ul class="nav justify-content-end">
     <li class="nav-item">
         <button class="btn btn-labeled btn-warning mb-2" onclick="cont();" type="button">Imprimir</button>
@@ -139,12 +139,6 @@
                 <th>
                     @Html.DisplayNameFor(model => model.IdColaborador)
                 </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.NomeCo)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.TelCo)
-                </th>
                 <th></th>
             </tr>
         </thead>
@@ -156,13 +150,6 @@
                     @Html.DisplayFor(modelItem => item.IdColaborador)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.NomeCo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TelCo)
-                </td>
-                <td>
-                    d
                 </td>
             </tr>
             }

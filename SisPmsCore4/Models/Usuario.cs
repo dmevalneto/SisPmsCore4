@@ -1,4 +1,5 @@
-﻿using SisPmsCore4.Util;
+﻿using Microsoft.AspNetCore.Http;
+using SisPmsCore4.Util;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -20,6 +21,19 @@ namespace SisPmsCore4.Models
         [Required(ErrorMessage = "Campo Obrigatório!")]
         public string Data { get; set; }
         public int setorid { get; set; }
+
+        IHttpContextAccessor HttpContextAccessor;
+
+        public Usuario()
+        {
+
+        }
+
+        //Recebe o contexto para acesso as variaveis de sessão
+        public Usuario(IHttpContextAccessor httpContextAcessor)
+        {
+            HttpContextAccessor = httpContextAcessor;
+        }
 
 
         public bool Validarlogin()
@@ -44,10 +58,8 @@ namespace SisPmsCore4.Models
 
         public void RegistrarUsuario()
         {
-            //inserir codigo com dados vindos do banco
-            var codigoDoSetor = 1;
             string dataNascimento = DateTime.Parse(Data).ToString("yyyy/MM/dd");
-            string sql = $"INSERT INTO usuario (nome, email, senha, data, setor_idsetor) VALUES('{Nome}','{Email}','{Senha}','{dataNascimento}','{codigoDoSetor}')";
+            string sql = $"INSERT INTO usuario (nome, email, senha, data, setor_idsetor) VALUES('{Nome}','{Email}','{Senha}','{dataNascimento}','{setorid}')";
             DAL objDAL = new DAL();
             objDAL.ExecutarComandoSQL(sql);
         }

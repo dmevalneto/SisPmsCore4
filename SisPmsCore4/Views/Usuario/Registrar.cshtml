@@ -28,6 +28,17 @@
             <input type="date" class="form-control" asp-for="Data">
             <span asp-validation-for="Data" class="text-danger"></span>
         </div>
+        <div class="form-group">
+            <label asp-for="setorid" class="control-label">Tipo Setor</label>
+            <select class="form-control" asp-for="setorid">
+                @{
+                    foreach (var item in (List<Setor>)ViewBag.ListaSetor)
+                    {
+                        <option value="@item.idSetor">@item.Nome</option>
+                    }
+                }
+            </select>
+        </div>
         <button type="submit" class="btn btn-block btn-primary">Registrar</button>
         <button type="button" class="btn btn-block btn-primary"><a style="color:white" href="~/Usuario/Index">Voltar</a></button>
 

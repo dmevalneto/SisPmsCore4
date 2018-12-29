@@ -10,6 +10,14 @@ namespace SisPmsCore4.Controllers
 {
     public class UsuarioController : Controller
     {
+
+        IHttpContextAccessor HttpContextAccessor;
+
+        public UsuarioController(IHttpContextAccessor httpContextAcessor)
+        {
+            HttpContextAccessor = httpContextAcessor;
+        }
+
         // GET: Usuario
         public ActionResult Index(int? id)
         {
@@ -21,6 +29,7 @@ namespace SisPmsCore4.Controllers
                     HttpContext.Session.SetString("NomeUsuarioLogado", string.Empty);
                 }
             }
+           
             return View();
         }
 
@@ -47,17 +56,20 @@ namespace SisPmsCore4.Controllers
         [HttpGet]
         public IActionResult Registrar()
         {
+            ViewBag.ListaSetor = new Setor(HttpContextAccessor).ListaSetor();
             return View();
         }
 
         [HttpPost]
         public IActionResult Registrar(Usuario usuario)
         {
+           
             if (ModelState.IsValid)
             {
                 usuario.RegistrarUsuario();
                 return RedirectToAction("Sucesso");
             }
+            ViewBag.ListaSetor = new Setor(HttpContextAccessor).ListaSetor();
             return View();
         }
 
