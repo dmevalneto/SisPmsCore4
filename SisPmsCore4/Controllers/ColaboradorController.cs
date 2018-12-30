@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SisPmsCore4.Models;
+using SisPmsCore4.Util;
+using System;
+using System.Data;
 
 namespace SisPmsCore4.Controllers
 {
@@ -44,28 +43,34 @@ namespace SisPmsCore4.Controllers
                 Historico objHistorico = new Historico(HttpContextAccessor);
                 objHistorico.colaborador_idcolaborador = int.Parse(ViewBag.idColaborador);
                 objHistorico.setor_idsetor = ViewBag.idSetor;
-                objHistorico.Data = DateTime.Now.ToString();
+                objHistorico.data = DateTime.Now.ToString();
                 objHistorico.Encaminhar();
-                return RedirectToAction("CartaEncaminhamento");
+                return RedirectToAction("HistoricoColaborador");
             }
             catch (Exception)
             {
 
                 return RedirectToAction("Index");
             }
-          
+
         }
 
-        public ActionResult CartaEncaminhamento()
+        public IActionResult HistoricoColaborador()
         {
-            ViewBag.idColaborador = TempData["idColaborador"].ToString();
-            CartaEncaminhamento objEncaminhamento = new CartaEncaminhamento(HttpContextAccessor);
-            ViewBag.ListaEncaminhamento = objEncaminhamento.RetornaCartaEncaminhamento(ViewBag.idColaborador);
+            try
+            {
+                Historico objHistorico = new Historico(HttpContextAccessor);
+                ViewBag.HistoricoColaborador = objHistorico.HistoricoColaborador();
+                return View();
+            }
+            catch (Exception)
+            {
 
-            //CartaEncaminhamento objEncaminhamento = new CartaEncaminhamento(HttpContextAccessor);
-            //ViewBag.ListaEncaminhamento = objEncaminhamento.RetornaCartaEncaminhamento();
-            return View();
+                throw;
+            }
         }
+
+      
 
 
         public IActionResult FiltrarColaborador(Colaborador form)
@@ -74,7 +79,7 @@ namespace SisPmsCore4.Controllers
             return View();
         }
 
-       
+
 
         // GET: Colaborador/Details/5
         public ActionResult Details(int id)
@@ -117,7 +122,7 @@ namespace SisPmsCore4.Controllers
             }
             catch
             {
-               
+
                 return View();
             }
         }

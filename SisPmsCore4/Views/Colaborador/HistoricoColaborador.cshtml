@@ -1,0 +1,52 @@
+﻿@model Historico
+@{
+    ViewData["Title"] = "Historico de Encaminhamentos";
+    Layout = "~/Views/Shared/_LayoutSp.cshtml";
+}
+
+
+<h2 class="text-center text-info">Historico de Encaminhamentos</h2>
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.idhistorico)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NomeCol)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SetorSe)
+                </th>
+                <th >
+                    @Html.DisplayNameFor(model => model.data)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in (List<Historico>)ViewBag.HistoricoColaborador)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.idhistorico)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomeCol)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SetorSe)
+                </td>
+                <td style="background-color:antiquewhite; border:dotted">
+                    @Html.DisplayFor(modelItem => item.data)
+                </td>
+                <td>
+                    @Html.ActionLink("Imprimir", "CartaEncaminhamento", "Colaborador", new { id = item.idhistorico }, new { @class = "btn btn-warning" }) |
+                    @Html.ActionLink("Add Observação", "Details", new { id = item.idhistorico }, new { @class = "btn btn-secondary" })
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
