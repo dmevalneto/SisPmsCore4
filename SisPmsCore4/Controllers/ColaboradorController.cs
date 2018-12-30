@@ -24,6 +24,7 @@ namespace SisPmsCore4.Controllers
         }
 
         [HttpGet]
+        //primeira view pega o Id do colaborador e lista os setores
         public IActionResult Encaminhar(int? id)
         {
             TempData["idColaborador"] = id;
@@ -34,6 +35,8 @@ namespace SisPmsCore4.Controllers
         }
 
         [HttpGet]
+        //Segunda view de encaminhamento persiste os dados de colaborador e seleciona os dados do setor a ser encaminhado cadastrando as info no banco
+        //e redireciona para a action exibindo os dados do historico 
         public IActionResult FinalizarEncaminhamento(int? id)
         {
             try
@@ -70,6 +73,54 @@ namespace SisPmsCore4.Controllers
             }
         }
 
+
+
+        public IActionResult VisualizarCartaEncaminhamento(int? id)
+        {
+            Historico item = new Historico();
+            string id_setor_usuario_logado = HttpContextAccessor.HttpContext.Session.GetString("IdSetorUsuarioLogado");
+            string sql = " SELECT  " +
+                " historico.idhistorico , historico.data, historico.observacao, colaborador.idcolaborador, historico.setor_idsetor, historico.usuario_idusuario, " +
+                " colaborador.nome as NomeCol, cpf as CpfCol, telefone as telefoneCol, " +
+                " setor.nome as NomeSe, setor.gestor as GestorSe, " +
+                " cargo.nome as NomeCargo, " +
+                " prestadora_servico.razao_social " +
+                " from historico  inner join colaborador  on historico.colaborador_idcolaborador = colaborador.idcolaborador  " +
+                " inner join setor on historico.setor_idsetor = setor.idsetor " +
+                " inner join cargo  on colaborador.cargo_idcargo = cargo.idcargo  " +
+                " inner join ocorrencia on colaborador.ocorrencia_idocorrencia = ocorrencia.idocorrencia " +
+                " inner join prestadora_servico on colaborador.prestadora_servico_idprestadora_servico = prestadora_servico.idprestadora_servico " +
+                $" WHERE historico.idhistorico = {id}" +
+                " order by historico.data DESC";
+
+
+
+            DAL objDAL = new DAL();
+            DataTable dt = objDAL.RetDataTable(sql);
+
+            item.idhistorico = int.Parse(dt.Rows[0]["idhistorico"].ToString());
+            item.NomeCol = dt.Rows[0]["NomeCol"].ToString();
+            item.SetorSe = dt.Rows[0]["NomeSe"].ToString();
+            item.data = DateTime.Parse(dt.Rows[0]["data"].ToString()).ToString("dd/MM/yyy");
+            item.CpfCol = dt.Rows[0]["CpfCol"].ToString();
+            item.TelefoneCol = dt.Rows[0]["telefoneCol"].ToString();
+            item.RazaoSocial = dt.Rows[0]["razao_social"].ToString();
+            item.NomeCargo = dt.Rows[0]["NomeCargo"].ToString();
+            item.GestorSe = dt.Rows[0]["GestorSe"].ToString();
+
+            ViewBag.IdHistorico = item.idhistorico;
+            ViewBag.NomeCol = item.NomeCol;
+            ViewBag.SetorSe = item.SetorSe;
+            ViewBag.Data = item.data;
+            ViewBag.CpfCol = item.CpfCol;
+            ViewBag.TelefoneCol = item.TelefoneCol;
+            ViewBag.RazaoSocial = item.RazaoSocial;
+            ViewBag.NomeCargo = item.NomeCargo;
+            ViewBag.GestorSe = item.GestorSe;
+            return View();
+        }
+
+      
       
 
 

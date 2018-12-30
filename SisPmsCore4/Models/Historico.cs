@@ -18,6 +18,11 @@ namespace SisPmsCore4.Models
         public int usuario_idusuario { get; set; }
         public string NomeCol { get; set; }
         public string SetorSe { get; set; }
+        public string CpfCol { get; set; }
+        public string TelefoneCol { get; set; }
+        public string RazaoSocial { get; set; }
+        public string NomeCargo { get; set; }
+        public string GestorSe { get; set; }
 
 
         IHttpContextAccessor HttpContextAccessor;
@@ -74,5 +79,35 @@ namespace SisPmsCore4.Models
             return lista;
         }
 
+
+        public Historico CartaEncaminhamento(int? id)
+        {
+            Historico item = new Historico();
+            string id_setor_usuario_logado = HttpContextAccessor.HttpContext.Session.GetString("IdSetorUsuarioLogado");
+            //string sql = " SELECT  " +
+            //    " historico.idhistorico , historico.data, historico.observacao, colaborador.idcolaborador, historico.setor_idsetor, historico.usuario_idusuario, " +
+            //    " colaborador.nome as NomeCol, " +
+            //    " setor.nome as NomeSe " +
+            //    " from historico  inner join colaborador  on historico.colaborador_idcolaborador = colaborador.idcolaborador  " +
+            //    " inner join setor on historico.setor_idsetor = setor.idsetor " +
+            //    " inner join cargo  on colaborador.cargo_idcargo = cargo.idcargo  " +
+            //    " inner join ocorrencia on colaborador.ocorrencia_idocorrencia = ocorrencia.idocorrencia " +
+            //    $" WHERE historico.idhistorico = {id}" +
+            //    " order by historico.data DESC";
+
+
+            string sql = $" SELECT  * from historico where idhistorico = {id}";
+
+            DAL objDAL = new DAL();
+            DataTable dt = objDAL.RetDataTable(sql);
+
+            item.idhistorico = int.Parse(dt.Rows[0]["idhistorico"].ToString());
+            //item.NomeCol = dt.Rows[0]["NomeCol"].ToString();
+            //item.SetorSe = dt.Rows[0]["NomeSe"].ToString();
+            //item.data = DateTime.Parse(dt.Rows[0]["data"].ToString()).ToString("dd/MM/yyy");
+            return item;
+        }
+
     }
 }
+

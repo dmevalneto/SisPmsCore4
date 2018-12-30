@@ -42,7 +42,7 @@
                     @Html.DisplayFor(modelItem => item.data)
                 </td>
                 <td>
-                    @Html.ActionLink("Imprimir", "CartaEncaminhamento", "Colaborador", new { id = item.idhistorico }, new { @class = "btn btn-warning" }) |
+                    @Html.ActionLink("Imprimir", "VisualizarCartaEncaminhamento", "Colaborador", new { id = item.idhistorico }, new { @class = "btn btn-warning" }) |
                     @Html.ActionLink("Add Observação", "Details", new { id = item.idhistorico }, new { @class = "btn btn-secondary" })
                 </td>
             </tr>
