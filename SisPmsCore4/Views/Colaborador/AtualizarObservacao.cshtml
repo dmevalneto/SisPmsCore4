@@ -1,0 +1,25 @@
+﻿@model SisPmsCore4.Models.Historico
+
+@{
+    ViewData["Title"] = "AtualizarObservacao";
+    Layout = "~/Views/Shared/_LayoutSp.cshtml";
+
+}
+
+<h2 class="text-center text-info">Observação</h2>
+<hr />
+
+<form asp-action="AtualizarObservacao">
+    <div class="form-group">
+        <label asp-for="idhistorico" class="control-label"></label>
+        <input asp-for="idhistorico" readonly class="form-control" value="@ViewBag.Desc.idhistorico" />
+        <span asp-validation-for="idhistorico" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="observacao" class="control-label"></label>
+        <input asp-for="observacao" class="form-control" value="@ViewBag.Desc.observacao" />
+        <span asp-validation-for="observacao" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Salvar</button>
+</form>
+

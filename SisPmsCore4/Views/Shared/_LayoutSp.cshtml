@@ -55,10 +55,10 @@
         </div>
     </nav>
     <nav aria-label="breadcrumb">
-  <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a asp-controller="" asp-action="">Home</a></li>
-  </ol>
-</nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-controller="" asp-action="">Home</a></li>
+        </ol>
+    </nav>
     <partial name="_CookieConsentPartial" />
 
     <div class="container body-content">
@@ -67,7 +67,7 @@
     </div>
     <hr />
     <footer>
-        <p>&copy; 2018 - SisPmsCore4</p>
+        <p class="h6">@ViewBag.Error</p>
     </footer>
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
@@ -95,7 +95,7 @@
              var setor = '@HttpContextAccessor.HttpContext.Session.GetString("IdSetorUsuarioLogado")'
             if (nome != "") {
                 var divNome = document.getElementById("NomeUsuarioLogado");
-                divNome.innerHTML = "Olá " + nome + - setor + " <a href='../Usuario/Index/0'>(Sair)</a>";
+                divNome.innerHTML = "Olá " + nome  + " <a href='../Usuario/Index/0'>(Sair)</a>";
                 divNome.style = "color:black; text-align: right; height:50px; padding-top:13px;"
             }
             else {

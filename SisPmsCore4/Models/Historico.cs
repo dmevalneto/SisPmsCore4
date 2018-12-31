@@ -48,6 +48,28 @@ namespace SisPmsCore4.Models
             objDAL.ExecutarComandoSQL(sql);
         }
 
+
+        public void AtualizarObservacao()
+        {
+            string sql = $"UPDATE historico SET observacao = '{observacao}' WHERE  idhistorico = {idhistorico}";
+            DAL objDAL = new DAL();
+            objDAL.ExecutarComandoSQL(sql);
+        }
+
+        public Historico CarregarObsercacao(int? id)
+        {
+            Historico item = new Historico();
+            string sql = $"SELECT idhistorico, observacao FROM historico WHERE idhistorico = {id}";
+            DAL objDAL = new DAL();
+            DataTable dt = objDAL.RetDataTable(sql);
+
+            item.idhistorico = int.Parse(dt.Rows[0]["idhistorico"].ToString());
+            item.observacao = dt.Rows[0]["observacao"].ToString();
+
+            return item;
+        }
+
+
         public List<Historico> HistoricoColaborador()
         {
             List<Historico> lista = new List<Historico>();

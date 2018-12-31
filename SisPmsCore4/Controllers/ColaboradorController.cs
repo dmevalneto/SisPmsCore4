@@ -119,15 +119,34 @@ namespace SisPmsCore4.Controllers
             ViewBag.GestorSe = item.GestorSe;
             return View();
         }
-
-      
-      
-
-
+        
         public IActionResult FiltrarColaborador(Colaborador form)
         {
             ViewBag.FiltrarColaborador = new Colaborador(HttpContextAccessor).FiltrarColaborador(form.Nome);
             return View();
+        }
+
+
+
+        // GET: Colaborador/Edit/5
+        public ActionResult AtualizarObservacao(int? id)
+        {
+            Historico objHistorico = new Historico(HttpContextAccessor);
+            ViewBag.Desc = objHistorico.CarregarObsercacao(id);
+            return View();
+        }
+
+        // POST: Colaborador/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AtualizarObservacao(Historico formulario)
+        {
+
+            // TODO: Add update logic here
+         
+                formulario.AtualizarObservacao();
+                return RedirectToAction("HistoricoColaborador");
+         
         }
 
 
@@ -219,9 +238,18 @@ namespace SisPmsCore4.Controllers
         // GET: Colaborador/Delete/5
         public ActionResult Delete(int? id)
         {
-            Colaborador objColaborador = new Colaborador(HttpContextAccessor);
-            objColaborador.ExcluirRegistro(id);
-            return View("Index");
+            try
+            {
+                Colaborador objColaborador = new Colaborador(HttpContextAccessor);
+                objColaborador.ExcluirRegistro(id);
+                return View("Index");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = "Contate o Administrador de Sistema!!" + (ex.Message);
+                return View("Index");
+            }
+           
         }
 
         // POST: Colaborador/Delete/5
