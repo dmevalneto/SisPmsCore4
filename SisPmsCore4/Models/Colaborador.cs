@@ -140,5 +140,7 @@ namespace SisPmsCore4.Models
             DAL objDAL = new DAL();
             objDAL.ExecutarComandoSQL(sql);
         }
+
+       
     }
 }

@@ -13,7 +13,7 @@ namespace SisPmsCore4.Models
     {
         public int idSetor { get; set; }
         [Required(ErrorMessage ="*")]
-        public int Codigo { get; set; }
+        public string Codigo { get; set; }
         [Required(ErrorMessage = "*")]
         public string Nome { get; set; }
         [Required(ErrorMessage = "*")]
@@ -56,7 +56,7 @@ namespace SisPmsCore4.Models
             {
                 item = new Setor();
                 item.idSetor = int.Parse(dt.Rows[i]["idsetor"].ToString());
-                item.Codigo = int.Parse(dt.Rows[i]["codigo"].ToString());
+                item.Codigo = dt.Rows[i]["codigo"].ToString();
                 item.Nome = dt.Rows[i]["nome"].ToString();
                 item.Telefone1 = dt.Rows[i]["telefone1"].ToString();
                 item.Telefone2 = dt.Rows[i]["telefone2"].ToString();

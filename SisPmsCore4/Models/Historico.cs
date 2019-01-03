@@ -23,6 +23,11 @@ namespace SisPmsCore4.Models
         public string RazaoSocial { get; set; }
         public string NomeCargo { get; set; }
         public string GestorSe { get; set; }
+        public string Tel1Col { get; set; }
+        public string Tel2Col { get; set; }
+        public string CepCol { get; set; }
+        public string BairroCol { get; set; }
+        public string LogradouroCol { get; set; }
 
 
         IHttpContextAccessor HttpContextAccessor;
@@ -106,27 +111,41 @@ namespace SisPmsCore4.Models
         {
             Historico item = new Historico();
             string id_setor_usuario_logado = HttpContextAccessor.HttpContext.Session.GetString("IdSetorUsuarioLogado");
-            //string sql = " SELECT  " +
-            //    " historico.idhistorico , historico.data, historico.observacao, colaborador.idcolaborador, historico.setor_idsetor, historico.usuario_idusuario, " +
-            //    " colaborador.nome as NomeCol, " +
-            //    " setor.nome as NomeSe " +
-            //    " from historico  inner join colaborador  on historico.colaborador_idcolaborador = colaborador.idcolaborador  " +
-            //    " inner join setor on historico.setor_idsetor = setor.idsetor " +
-            //    " inner join cargo  on colaborador.cargo_idcargo = cargo.idcargo  " +
-            //    " inner join ocorrencia on colaborador.ocorrencia_idocorrencia = ocorrencia.idocorrencia " +
-            //    $" WHERE historico.idhistorico = {id}" +
-            //    " order by historico.data DESC";
+            string sql = " SELECT  " +
+                " historico.idhistorico , historico.data, historico.observacao, colaborador.idcolaborador, historico.setor_idsetor, historico.usuario_idusuario, " +
+                " colaborador.nome as NomeCol, cpf as CpfCol, telefone as telefoneCol, " +
+                " setor.nome as NomeSe, setor.gestor as GestorSe, setor.telefone1 as Tel1Col, setor.telefone2 as Tel2Col, setor.cep as CepCol, setor.bairro as BairroCol, setor.logradouro as LogradouroCol,   " +
+                " cargo.nome as NomeCargo, " +
+                " prestadora_servico.razao_social " +
+                " from historico  inner join colaborador  on historico.colaborador_idcolaborador = colaborador.idcolaborador  " +
+                " inner join setor on historico.setor_idsetor = setor.idsetor " +
+                " inner join cargo  on colaborador.cargo_idcargo = cargo.idcargo  " +
+                " inner join ocorrencia on colaborador.ocorrencia_idocorrencia = ocorrencia.idocorrencia " +
+                " inner join prestadora_servico on colaborador.prestadora_servico_idprestadora_servico = prestadora_servico.idprestadora_servico " +
+                $" WHERE historico.idhistorico = {id}" +
+                " order by historico.data DESC";
 
 
-            string sql = $" SELECT  * from historico where idhistorico = {id}";
 
             DAL objDAL = new DAL();
             DataTable dt = objDAL.RetDataTable(sql);
 
             item.idhistorico = int.Parse(dt.Rows[0]["idhistorico"].ToString());
-            //item.NomeCol = dt.Rows[0]["NomeCol"].ToString();
-            //item.SetorSe = dt.Rows[0]["NomeSe"].ToString();
-            //item.data = DateTime.Parse(dt.Rows[0]["data"].ToString()).ToString("dd/MM/yyy");
+            item.observacao = dt.Rows[0]["observacao"].ToString();
+            item.NomeCol = dt.Rows[0]["NomeCol"].ToString();
+            item.SetorSe = dt.Rows[0]["NomeSe"].ToString();
+            item.data = DateTime.Parse(dt.Rows[0]["data"].ToString()).ToString("dd/MM/yyy");
+            item.CpfCol = dt.Rows[0]["CpfCol"].ToString();
+            item.TelefoneCol = dt.Rows[0]["telefoneCol"].ToString();
+            item.RazaoSocial = dt.Rows[0]["razao_social"].ToString();
+            item.NomeCargo = dt.Rows[0]["NomeCargo"].ToString();
+            item.GestorSe = dt.Rows[0]["GestorSe"].ToString();
+            item.Tel1Col = dt.Rows[0]["Tel1Col"].ToString();
+            item.Tel2Col = dt.Rows[0]["Tel2Col"].ToString();
+            item.CepCol = dt.Rows[0]["CepCol"].ToString();
+            item.BairroCol = dt.Rows[0]["BairroCol"].ToString();
+            item.LogradouroCol = dt.Rows[0]["LogradouroCol"].ToString();
+
             return item;
         }
 

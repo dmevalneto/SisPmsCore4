@@ -8,12 +8,16 @@ namespace SisPmsCore4.Util
 {
     public class DAL
     {
-        private static string server = "localhost";
-        private static string database = "sispmscore";
-        private static string user = "root";
-        private static string password = "";
+        //private static string server = "localhost";
+        private static string server = "bd.asp.hostazul.com.br";
+        private static string  database = "9256_sispmscore";
+        //private static string user = "root";
+        private static string user = "9256_aplicacao";
+        //private static string password = "";
+        private static string password = "cqt024dcqt024d";
+        private static string port = "4406";
 
-        private string connectionString = $"Server={server};Database={database};Uid={user};Pwd={password}";
+        private string connectionString = $"Server={server};Port={port};Database={database};Uid={user};Pwd={password}";
         //private MySqlConnection connection;
         private MySqlConnection connection;
 
@@ -21,6 +25,7 @@ namespace SisPmsCore4.Util
         {
             connection = new MySqlConnection(connectionString);
             connection.Open();
+            
         }
 
         //Executa Select
@@ -31,6 +36,7 @@ namespace SisPmsCore4.Util
             MySqlDataAdapter da = new MySqlDataAdapter(command);
             da.Fill(dataTable);
             return dataTable;
+
         }
 
         //Executa Insert, Update, Delete
@@ -38,6 +44,11 @@ namespace SisPmsCore4.Util
         {
             MySqlCommand command = new MySqlCommand(sql, connection);
             command.ExecuteNonQuery();
+        }
+
+        public void FechaarConexao()
+        {
+            connection.Close();
         }
     }
 }
