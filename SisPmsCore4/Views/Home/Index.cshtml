@@ -1,49 +1,67 @@
 ﻿@{
     ViewData["Title"] = "Menu";
+    Layout = "~/Views/Shared/_LayoutMenu.cshtml";
 }
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
-<hr />
-
-<center><h2 class="text-primary">Seja Bem Vindo</h2></center>
-<hr>
-
+<br />
 
 <div class="container">
     <div class="row">
-        <div class="col-sm">
-            <div class="card">
-                <div class="card-header">
-                    Setor Pessoal
-                </div>
+        <div class="col-6">
+            <div class="card text-white bg-dark mb-3">
+                <div class="card-header">Setor Pessoal</div>
                 <div class="card-body">
-                    <h5 class="card-title">Gestão de Colaboradores</h5>
                     <a class="btn btn-block btn-primary" asp-controller="SetorPessoal" asp-action="Index">Acessar</a>
                 </div>
             </div>
         </div>
-        <div class="col-sm">
-            <div class="card">
-                <div class="card-header">
-                    Anotações
-                </div>
+        <div class="col-6">
+            <div class="card text-white bg-dark mb-3">
+                <div class="card-header">Pedagogico</div>
                 <div class="card-body">
-                    <h5 class="card-title">Stick</h5>
-                    <a class="btn btn-block btn-primary" asp-controller="Menu" asp-action="Index" asp-area="SetorPessoal"><span class="glyphicon glyphicon-edit"></span>  Acessar</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm">
-            <div class="card">
-                <div class="card-header">
-                    Admin
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">Administração do Sistema</h5>
-                    <a class="btn btn-block btn-primary" asp-controller="Admin" asp-action="Index">Acessar</a>
+                    <a class="btn btn-block btn-primary" asp-controller="SetorPessoal" asp-action="Index">Acessar</a>
                 </div>
             </div>
         </div>
     </div>
-
+    <br />
+    <div class="row">
+        <div class="col-6">
+            <div class="card text-white bg-dark mb-3">
+                <div class="card-header">Nutrição</div>
+                <div class="card-body">
+                    <a class="btn btn-block btn-primary" asp-controller="SetorPessoal" asp-action="Index">Acessar</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="card text-white bg-dark mb-3">
+                <div class="card-header">Manutenção</div>
+                <div class="card-body">
+                    <a class="btn btn-block btn-primary" asp-controller="SetorPessoal" asp-action="Index">Acessar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-6">
+            <div class="card text-white bg-dark mb-3">
+                <div class="card-header">Professores</div>
+                <div class="card-body">
+                    <a class="btn btn-block btn-primary" asp-controller="SetorPessoal" asp-action="Index">Acessar</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="card text-white bg-dark mb-3">
+                <div class="card-header">Atendimento</div>
+                <div class="card-body">
+                    <a class="btn btn-block btn-primary" asp-controller="SetorPessoal" asp-action="Index">Acessar</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 

@@ -48,7 +48,7 @@ namespace SisPmsCore4.Models
             Setor item;
 
             string id_usuario_logado = HttpContextAccessor.HttpContext.Session.GetString("IdUsuarioLogado");
-            string sql = "SELECT * FROM setor";
+            string sql = "SELECT * FROM setor ORDER BY nome";
             DAL objDAL = new DAL();
             DataTable dt = objDAL.RetDataTable(sql);
 

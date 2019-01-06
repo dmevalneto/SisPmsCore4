@@ -56,6 +56,7 @@ namespace SisPmsCore4.Controllers
             }
             catch
             {
+                ViewBag.ListaTipoSetor = new TipoSetor(HttpContextAccessor).ListaTipoSetor();
                 return View();
             }
         }

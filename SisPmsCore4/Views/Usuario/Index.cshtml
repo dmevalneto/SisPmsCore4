@@ -4,35 +4,94 @@
     Layout = "~/Views/Shared/_LayoutLogin.cshtml";
 }
 
-<div class="container" style="background-color:rgba(235, 225, 225, 0.35); border-radius: 50px; padding: 50px; width:500px;">
-      @{
-        try
-        {
-            if (TempData["MensagemLoginInvalido"].ToString() != null)
+@*<div class="container" style="background-color:rgba(235, 225, 225, 0.35); border-radius: 50px; padding: 50px; width:500px;">
+          @{
+            try
             {
-                <div class="alert alert-danger">
-                    <strong>Atenção!</strong> @TempData["MensagemLoginInvalido"]
-                </div>
+                if (TempData["MensagemLoginInvalido"].ToString() != null)
+                {
+                    <div class="alert alert-danger">
+                        <strong>Atenção!</strong> @TempData["MensagemLoginInvalido"]
+                    </div>
+                }
             }
+            catch { }
         }
-        catch { }
-    }
-    <form asp-controller="Usuario" asp-action="ValidarLogin">
-        <div class="form-group">
-            <label for="exampleInputEmail1">Email</label>
-            <input type="email" class="form-control" asp-for="Email" aria-describedby="emailHelp" placeholder="Email">
-            <small id="emailHelp" class="form-text text-muted">Nós nunca compartilharemos seu e-mail com mais ninguém.</small>
-        </div>
-        <div class="form-group">
-            <label for="exampleInputPassword1">Senha</label>
-            <input type="password" class="form-control" asp-for="Senha" placeholder="Senha">
-        </div>
-        <div class="form-group form-check">
-            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-            <label class="form-check-label" for="exampleCheck1">Lebrar meu Acesso</label>
-        </div>
-        <button type="submit" class="btn btn-block btn-success">Entrar</button>
-        <button type="button" class="btn btn-block btn-info"><a style="color:white" href="~/Usuario/Registrar">Criar Conta</a></button>
-    </form>
+        <form asp-controller="Usuario" asp-action="ValidarLogin">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Email</label>
+                <input type="email" class="form-control" asp-for="Email" aria-describedby="emailHelp" placeholder="Email">
+                <small id="emailHelp" class="form-text text-muted">Nós nunca compartilharemos seu e-mail com mais ninguém.</small>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Senha</label>
+                <input type="password" class="form-control" asp-for="Senha" placeholder="Senha">
+            </div>
+            <div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                <label class="form-check-label" for="exampleCheck1">Lebrar meu Acesso</label>
+            </div>
+            <button type="submit" class="btn btn-block btn-success">Entrar</button>
+            <button type="button" class="btn btn-block btn-info"><a style="color:white" href="~/Usuario/Registrar">Criar Conta</a></button>
+        </form>
 
+    </div>*@
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-7">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <span class="glyphicon glyphicon-lock"></span> Login
+                </div>
+                <div class="panel-body">
+                    <form asp-controller="Usuario" asp-action="ValidarLogin">
+                        @{
+                            try
+                            {
+                                if (TempData["MensagemLoginInvalido"].ToString() != null)
+                                {
+                                    <div class="alert alert-danger">
+                                        <strong>Atenção!</strong> @TempData["MensagemLoginInvalido"]
+                                    </div>
+                                }
+                            }
+                            catch { }
+                        }
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email</label>
+                            <input type="email" class="form-control" asp-for="Email" aria-describedby="emailHelp" placeholder="Email">
+                            <small id="emailHelp" class="form-text text-muted">Nós nunca compartilharemos seu e-mail com mais ninguém.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Senha</label>
+                            <input type="password" class="form-control" asp-for="Senha" placeholder="Senha">
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-3 col-sm-9">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" />
+                                        Guardar Senha
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group last">
+                            <div class="col-sm-offset-3 col-sm-9">
+                                <button type="submit" class="btn btn-success btn-sm">
+                                    Entrar
+                                </button>
+                                <button type="reset" class="btn btn-warning btn-sm">
+                                    <a style="color:white" href="~/Usuario/Registrar">Criar Conta</a>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="panel-footer">
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

@@ -51,22 +51,11 @@ namespace SisPmsCore4.Models
 
         public void SalvarNovoRegistro()
         {
-            try
-            {
+           
                 string sql = $"INSERT INTO cargo (nome, descricao) VALUES ('{Nome}', '{Descricao}')";
                 DAL objDAL = new DAL();
                 objDAL.ExecutarComandoSQL(sql);
-            }
-            catch (Exception)
-            {
-               
-                throw;
-            }
-            finally
-            {
-                DAL objDAL = new DAL();
-                objDAL.FechaarConexao();
-            }
+          
          
         }
     }

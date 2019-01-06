@@ -3,57 +3,48 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - SisPms</title>
+    <title>@ViewData["Title"] - WebApplication4</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
- 
 </head>
 <body onload="CarregarUsuarioLogado()">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <img src="~/images/logo.png" width="50" height="50" alt=""> -
+        <img src="~/images/logo.png" width="50" height="50" alt=""> - 
         <a asp-area="" asp-controller="SetorPessoal" asp-action="Index" class="navbar-brand">SisPms</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
+
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item active">
-                    <a class="nav-link" asp-area="" asp-controller="Colaborador" asp-action="Index">Colaborador<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Cadastros
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" asp-area="" asp-controller="TipoSetor" asp-action="Index">Tipo Setor<span class="sr-only">(current)</span></a>
-                        <a class="dropdown-item" asp-area="" asp-controller="Setor" asp-action="Index">Setor<span class="sr-only">(current)</span></a>
-                        <a class="dropdown-item" asp-area="" asp-controller="Cargo" asp-action="Index">Cargo <span class="sr-only">(current)</span></a>
-                        <a class="dropdown-item" asp-area="" asp-controller="Ocorrencia" asp-action="Index">Ocorrência <span class="sr-only">(current)</span></a>
-                        <a class="dropdown-item" asp-area="" asp-controller="PrestadoraServico" asp-action="Index">Prestadora de Serviço <span class="sr-only">(current)</span></a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" asp-area="" asp-controller="Colaborador" asp-action="HistoricoColaborador">Encaminhamentos <span class="sr-only">(current)</span></a>
-                    </div>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Sobre</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Sugestões</a>
                 </li>
             </ul>
             @using Microsoft.AspNetCore.Http;
             @inject IHttpContextAccessor HttpContextAccessor
             <div id="NomeUsuarioLogado"></div>
-
         </div>
+
     </nav>
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-          <li><a href="javascript:history.back()">Voltar</a></li>  
-        </ol>
-    </nav>
-    <partial name="_CookieConsentPartial" />
+
     <div class="container body-content">
         @RenderBody()
+        <hr />
+
     </div>
-    <hr />
     <footer>
-        <p class="h6">@ViewBag.Error</p>
+        <div class="row">
+            <div class="col-4 text-center"> <p>Error : @ViewBag.Error</p></div>
+            <div class="col-4 text-center"> <p>&copy; 2019 - SisPms</p></div>
+            <div class="col-4 text-center"> OnLine : @HttpContextAccessor.HttpContext.Session.GetString("NomeUsuarioLogado")</p></div>
+        </div>
     </footer>
-   
     <script>
         function CarregarUsuarioLogado() {
             var nome = '@HttpContextAccessor.HttpContext.Session.GetString("NomeUsuarioLogado")'
@@ -71,6 +62,6 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
-   
+
 </body>
 </html>

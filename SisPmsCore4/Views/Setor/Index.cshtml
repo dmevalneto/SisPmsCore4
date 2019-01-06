@@ -12,11 +12,11 @@
     <button class="btn btn-primary" onclick="NovoRegistro()">Novo Registro</button>
 </p>
 <div class="table-responsive">
-    <table class="table">
+    <table class="table table-sm">
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.idSetor)
+                    @Html.DisplayNameFor(model => model.Codigo)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Nome)
@@ -32,7 +32,7 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.idSetor)
+                        @Html.DisplayFor(modelItem => item.Codigo)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Nome)
@@ -41,9 +41,9 @@
                         @Html.DisplayFor(modelItem => item.Gestor)
                     </td>
                     <td>
-                        @Html.ActionLink("Editar", "Edit", new { id = item.idSetor }, new { @class = "btn btn-success" }) |
-                        @Html.ActionLink("Detalhes", "Details", new { id = item.idSetor }, new { @class = "btn btn-secondary" }) |
-                        @Html.ActionLink("Deletar", "Delete", new { id = item.idSetor }, new { @class = "btn btn-danger" })
+                        @Html.ActionLink("Editar", "Edit", new { id = item.idSetor }, new { @class = "btn btn-success btn-sm" }) |
+                        @Html.ActionLink("Detalhes", "Details", new { id = item.idSetor }, new { @class = "btn btn-secondary btn-sm" }) |
+                        @Html.ActionLink("Deletar", "Delete", new { id = item.idSetor }, new { @class = "btn btn-danger btn-sm" })
                     </td>
                 </tr>
             }
