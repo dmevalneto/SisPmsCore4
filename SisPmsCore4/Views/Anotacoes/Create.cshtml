@@ -1,0 +1,27 @@
+﻿@model Anotacoes
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_LayoutMenu.cshtml";
+}
+
+<h2 class="text-center text-info">Anotações</h2>
+<hr />
+<form asp-action="Create">
+    <div class="form-group">
+        <label asp-for="Nota" class="control-label"></label>
+        <textarea rows="5" asp-for="Nota" class="form-control"></textarea>
+        <span asp-validation-for="Nota" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="setor_idsetor" class="control-label">Setor</label>
+        <select class="form-control" asp-for="setor_idsetor">
+            @{
+                foreach (var item in (List<Setor>)ViewBag.ListaSetor)
+                {
+                    <option value="@item.idSetor">@item.Nome</option>
+                }
+            }
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Salvar</button>
+</form>

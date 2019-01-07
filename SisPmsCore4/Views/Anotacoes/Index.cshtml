@@ -1,0 +1,59 @@
+﻿@model Anotacoes
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutMenu.cshtml";
+}
+
+<h2 class="text-center text-info">Anotações por Setor</h2>
+<hr />
+<p>
+    @*<a class="btn btn-default" asp-action="Create">Novo Registro</a>*@
+    <button class="btn btn-primary" onclick="NovoRegistro()">Novo Registro</button>
+</p>
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nota)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NomeSetor)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Data)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in (List<Anotacoes>)ViewBag.ListaAnotacoes)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nota)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomeSetor)
+                </td>
+                <td style="background-color:antiquewhite; border:dotted">
+                    @Html.DisplayFor(modelItem => item.Data)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = item.IdAnotacoes }, new { @class = "btn btn-success" }) |
+                    @Html.ActionLink("Detalhes", "Details", new { id = item.IdAnotacoes }, new { @class = "btn btn-secondary" }) |
+                    @Html.ActionLink("Deletar", "Delete", new { id = item.IdAnotacoes }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+<script>
+    function NovoRegistro() {
+        window.location.href = "../Anotacoes/Create";
+    }
+</script>
+
