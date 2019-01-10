@@ -74,6 +74,30 @@ namespace SisPmsCore4.Models
 
         }
 
+        public Setor CarregarSetorUsuario()
+        {
+            string IdSetorUsuarioLogado = HttpContextAccessor.HttpContext.Session.GetString("IdSetorUsuarioLogado");
+            Setor item = new Setor();
+            string sql = $"SELECT * FROM 9256_sispmscore.setor where idsetor = {IdSetorUsuarioLogado}";
+            DAL objDAL = new DAL();
+            DataTable dt = objDAL.RetDataTable(sql);
+
+            item.idSetor = int.Parse(dt.Rows[0]["idsetor"].ToString());
+            item.Codigo = dt.Rows[0]["codigo"].ToString();
+            item.Nome = dt.Rows[0]["nome"].ToString();
+            item.Telefone1 = dt.Rows[0]["telefone1"].ToString();
+            item.Telefone2 = dt.Rows[0]["telefone2"].ToString();
+            item.Cep = dt.Rows[0]["cep"].ToString();
+            item.Bairro = dt.Rows[0]["bairro"].ToString();
+            item.Logradouro = dt.Rows[0]["logradouro"].ToString();
+            item.Numero = dt.Rows[0]["numero"].ToString();
+            item.Latitude = dt.Rows[0]["latitude"].ToString();
+            item.Longitude = dt.Rows[0]["longitude"].ToString();
+            item.Gestor = dt.Rows[0]["gestor"].ToString();
+
+            return item;
+        }
+
         public void SalvarNovoRegistro()
         {
             string sql = $"INSERT INTO setor (codigo, nome, telefone1, telefone2, cep, bairro, logradouro, numero, latitude, longitude, gestor, tipo_setor_idtipo_setor) VALUES ('{Codigo}', '{Nome}', '{Telefone1}', '{Telefone2}', '{Cep}', '{Bairro}', '{Logradouro}', '{Numero}', '{Latitude}', '{Longitude}', '{Gestor}', {tipo_setor_idtipo_setor})";

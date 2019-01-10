@@ -80,7 +80,7 @@ namespace SisPmsCore4.Controllers
 
             Historico objHistorico = new Historico(HttpContextAccessor);
             ViewBag.CartaEncaminhamento = objHistorico.CartaEncaminhamento(id);
-            ViewBag.IdHistorico =  ViewBag.CartaEncaminhamento.idhistorico;
+            ViewBag.IdHistorico = ViewBag.CartaEncaminhamento.idhistorico;
             ViewBag.NomeCol = ViewBag.CartaEncaminhamento.NomeCol;
             ViewBag.SetorSe = ViewBag.CartaEncaminhamento.SetorSe;
             ViewBag.Data = ViewBag.CartaEncaminhamento.data;
@@ -95,12 +95,22 @@ namespace SisPmsCore4.Controllers
             ViewBag.CepCol = ViewBag.CartaEncaminhamento.CepCol;
             ViewBag.BairroCol = ViewBag.CartaEncaminhamento.BairroCol;
             ViewBag.LogradouroCol = ViewBag.CartaEncaminhamento.LogradouroCol;
+            ViewBag.CarregarSetorUsuario = new Setor(HttpContextAccessor).CarregarSetorUsuario();
             return View();
         }
-        
+
         public IActionResult FiltrarColaborador(Colaborador form)
         {
-            ViewBag.FiltrarColaborador = new Colaborador(HttpContextAccessor).FiltrarColaborador(form.Nome);
+            if (form.Nome == null)
+            {
+                ViewBag.Error = " Por favor digite um nome para a pesquisa !!";
+                return View("Index");
+            }
+            else
+            {
+                ViewBag.FiltrarColaborador = new Colaborador(HttpContextAccessor).FiltrarColaborador(form.Nome);
+               
+            }
             return View();
         }
 
@@ -121,17 +131,19 @@ namespace SisPmsCore4.Controllers
         {
 
             // TODO: Add update logic here
-         
-                formulario.AtualizarObservacao();
-                return RedirectToAction("HistoricoColaborador");
-         
+
+            formulario.AtualizarObservacao();
+            return RedirectToAction("HistoricoColaborador");
+
         }
 
 
 
         // GET: Colaborador/Details/5
-        public ActionResult Details(int id)
+        public ActionResult PesquisarHistoricoPorColaborador(int id)
         {
+            Historico objHistorico = new Historico();
+            ViewBag.PesquisarHistoricoPorColaborador = objHistorico.PesquisarHistoricoPorColaborador(id);
             return View();
         }
 
@@ -227,7 +239,7 @@ namespace SisPmsCore4.Controllers
                 ViewBag.Error = "Contate o Administrador de Sistema!!" + (ex.Message);
                 return View("Index");
             }
-           
+
         }
 
         // POST: Colaborador/Delete/5

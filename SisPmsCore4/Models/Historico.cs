@@ -107,6 +107,40 @@ namespace SisPmsCore4.Models
         }
 
 
+
+        public List<Historico> PesquisarHistoricoPorColaborador(int id)
+        {
+            List<Historico> lista = new List<Historico>();
+            Historico item;
+         //   string id_setor_usuario_logado = HttpContextAccessor.HttpContext.Session.GetString("IdSetorUsuarioLogado");
+            string sql = " SELECT  " +
+                " historico.idhistorico , historico.data, historico.observacao, colaborador.idcolaborador, historico.setor_idsetor, historico.usuario_idusuario, " +
+                " colaborador.nome as NomeCol, " +
+                " setor.nome as NomeSe " +
+                " from historico  inner join colaborador  on historico.colaborador_idcolaborador = colaborador.idcolaborador  " +
+                " inner join setor on historico.setor_idsetor = setor.idsetor " +
+                " inner join cargo  on colaborador.cargo_idcargo = cargo.idcargo  " +
+                " inner join ocorrencia on colaborador.ocorrencia_idocorrencia = ocorrencia.idocorrencia " +
+                $" WHERE colaborador_idcolaborador = {id}  " +
+                " order by historico.data DESC";
+
+
+            DAL objDAL = new DAL();
+            DataTable dt = objDAL.RetDataTable(sql);
+
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                item = new Historico();
+                item.idhistorico = int.Parse(dt.Rows[i]["idhistorico"].ToString());
+                item.NomeCol = dt.Rows[i]["NomeCol"].ToString();
+                item.SetorSe = dt.Rows[i]["NomeSe"].ToString();
+                item.data = DateTime.Parse(dt.Rows[i]["data"].ToString()).ToString("dd/MM/yyy");
+                lista.Add(item);
+            }
+            return lista;
+        }
+
+
         public Historico CartaEncaminhamento(int? id)
         {
             Historico item = new Historico();

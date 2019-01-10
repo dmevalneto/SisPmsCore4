@@ -25,6 +25,9 @@ namespace SisPmsCore4.Models
         public int cargo_idcargo { get; set; }
         public int ocorrencia_idocorrencia { get; set; }
         public int prestadora_servico_idprestadora_servico { get; set; }
+
+        public string NomeSe { get; set; }
+        public string GestorSe { get; set; }
         IHttpContextAccessor HttpContextAccessor;
 
         public Colaborador()
@@ -47,7 +50,13 @@ namespace SisPmsCore4.Models
             Colaborador item;
 
             string id_usuario_logado = HttpContextAccessor.HttpContext.Session.GetString("IdUsuarioLogado");
-            string sql = $"SELECT idcolaborador, nome, cpf, data_admissao, telefone, setor_idsetor, cargo_idcargo, ocorrencia_idocorrencia, prestadora_servico_idprestadora_servico FROM colaborador WHERE  nome LIKE '%{nome}%'";
+            //string sql = $"SELECT idcolaborador, nome, cpf, data_admissao, telefone, setor_idsetor, cargo_idcargo, ocorrencia_idocorrencia, prestadora_servico_idprestadora_servico FROM colaborador WHERE  nome LIKE '%{nome}%'";
+            string sql = " SELECT " +
+                " colaborador.idcolaborador, colaborador.nome , colaborador.cpf, colaborador.data_admissao, colaborador.telefone, colaborador.setor_idsetor, colaborador.cargo_idcargo, colaborador.ocorrencia_idocorrencia, colaborador.prestadora_servico_idprestadora_servico , " +
+                " setor.nome as NomeSe " +
+                " FROM colaborador " +
+                " inner join setor on colaborador.setor_idsetor = setor.idsetor " +
+                $" WHERE  colaborador.nome LIKE '%{nome}%' ";
             DAL objDAL = new DAL();
             DataTable dt = objDAL.RetDataTable(sql);
 
@@ -63,8 +72,43 @@ namespace SisPmsCore4.Models
                 item.cargo_idcargo = int.Parse(dt.Rows[i]["cargo_idcargo"].ToString());
                 item.ocorrencia_idocorrencia = int.Parse(dt.Rows[i]["ocorrencia_idocorrencia"].ToString());
                 item.prestadora_servico_idprestadora_servico = int.Parse(dt.Rows[i]["prestadora_servico_idprestadora_servico"].ToString());
+                item.NomeSe = dt.Rows[i]["NomeSe"].ToString();
                 lista.Add(item);
             }
+            return lista;
+
+        }
+
+        public List<Colaborador> FiltrarColaboradorPorSetor(int id)
+        {
+
+            List<Colaborador> lista = new List<Colaborador>();
+            Colaborador item;
+
+            string id_usuario_logado = HttpContextAccessor.HttpContext.Session.GetString("IdUsuarioLogado");
+            string sql = " select " +
+                " colaborador.idcolaborador, colaborador.nome, colaborador.cpf, colaborador.data_admissao, colaborador.telefone, " +
+                " setor.nome as NomeSe, setor.gestor as GestorSe " +
+                " from colaborador " +
+                " inner join setor on colaborador.setor_idsetor = setor.idsetor " +
+                $" where setor_idsetor = {id} ";
+            DAL objDAL = new DAL();
+            DataTable dt = objDAL.RetDataTable(sql);
+
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                item = new Colaborador();
+                item.idColaborador = int.Parse(dt.Rows[i]["idcolaborador"].ToString());
+                item.Nome = dt.Rows[i]["nome"].ToString();
+                item.Cpf = dt.Rows[i]["cpf"].ToString();
+                item.DataAdmissao = DateTime.Parse(dt.Rows[i]["data_admissao"].ToString()).ToString("dd/MM/yyy");
+                item.Telefone = dt.Rows[i]["telefone"].ToString();
+                item.NomeSe = dt.Rows[i]["NomeSe"].ToString();
+                item.GestorSe = dt.Rows[i]["GestorSe"].ToString();
+
+                lista.Add(item);
+            }
+
             return lista;
 
         }

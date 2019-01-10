@@ -42,7 +42,7 @@
     </nav>
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-          <li><a href="javascript:history.back()">Voltar</a></li>  
+            <li><a href="javascript:history.back()">Voltar</a></li>
         </ol>
     </nav>
     <partial name="_CookieConsentPartial" />
@@ -51,9 +51,26 @@
     </div>
     <hr />
     <footer>
-        <p class="h6">@ViewBag.Error</p>
+        <div class="row">
+            <div class="col-4 text-center">
+                @{
+                    try
+                    {
+                        if (ViewBag.Error.ToString() != null)
+                        {
+                            <div class="alert alert-warning">
+                                <strong>Atenção!</strong> @ViewBag.Error
+                            </div>
+                        }
+                    }
+                    catch { }
+                }
+            </div>
+            <div class="col-4 text-center"> <p>&copy; 2019 - SisPms</p></div>
+            <div class="col-4 text-center"> OnLine : @HttpContextAccessor.HttpContext.Session.GetString("NomeUsuarioLogado")</p></div>
+        </div>
     </footer>
-   
+
     <script>
         function CarregarUsuarioLogado() {
             var nome = '@HttpContextAccessor.HttpContext.Session.GetString("NomeUsuarioLogado")'
@@ -71,6 +88,6 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
-   
+
 </body>
 </html>

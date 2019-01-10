@@ -19,7 +19,7 @@
                 @Html.DisplayNameFor(model => model.Nome)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Cpf)
+                @Html.DisplayNameFor(model => model.NomeSe)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.DataAdmissao)
@@ -54,8 +54,8 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Nome)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Cpf)
+                <td style="background-color:antiquewhite; border:dotted">
+                    @Html.DisplayFor(modelItem => item.NomeSe)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.DataAdmissao)
@@ -77,7 +77,7 @@
                     </td>*@
                 <td>
                     @Html.ActionLink("Editar", "Edit", new { id = item.idColaborador }, new { @class = "btn btn-success" }) |
-                    @Html.ActionLink("Detalhes", "Details", new { /* id=item.PrimaryKey */ }, new { @class = "btn btn-secondary" }) |
+                    @Html.ActionLink("Detalhes", "PesquisarHistoricoPorColaborador", new {  id=item.idColaborador }, new { @class = "btn btn-secondary" }) |
                     @Html.ActionLink("Deletar", "Delete", new { id = item.idColaborador }, new { @class = "btn btn-danger" }) |
                     @Html.ActionLink("Encaminhar", "Encaminhar", new { id = item.idColaborador }, new { @class = "btn btn-dark" })
                 </td>
