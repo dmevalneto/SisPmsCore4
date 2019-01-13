@@ -1,9 +1,8 @@
 ﻿
 @{
-    ViewData["Title"] = "Encaminhar";
+    ViewData["Title"] = "FiltrarSetor";
     Layout = "~/Views/Shared/_LayoutSp.cshtml";
 }
-
 
 <div class="table-responsive">
     <table class="table table-bordered">
@@ -95,7 +94,7 @@
                             @Html.DisplayFor(modelItem => item.tipo_setor_idtipo_setor)
                         </td>*@
                     <td>
-                        @Html.ActionLink("Selecionar", "FinalizarEncaminhamento", new { id = item.idSetor }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Selecionar", "FiltrarColaboradorPorSetor", new { id = item.idSetor }, new { @class = "btn btn-primary" })
                     </td>
                 </tr>
             }

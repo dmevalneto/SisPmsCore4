@@ -11,16 +11,13 @@
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.idhistorico)
+                   Colaborador
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.NomeCol)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.SetorSe)
+                   Setor
                 </th>
                 <th >
-                    @Html.DisplayNameFor(model => model.data)
+                 Data
                 </th>
                 <th></th>
             </tr>
@@ -29,9 +26,6 @@
             @foreach (var item in (List<Historico>)ViewBag.HistoricoColaborador)
             {
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.idhistorico)
-                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.NomeCol)
                 </td>

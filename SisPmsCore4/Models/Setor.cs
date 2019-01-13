@@ -73,6 +73,7 @@ namespace SisPmsCore4.Models
             return lista;
 
         }
+        
 
         public Setor CarregarSetorUsuario()
         {

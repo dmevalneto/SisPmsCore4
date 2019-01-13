@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿ using Microsoft.AspNetCore.Http;
 using SisPmsCore4.Util;
 using System;
 using System.Collections.Generic;
@@ -13,6 +13,7 @@ namespace SisPmsCore4.Models
         public int idCargo { get; set; }
         public string Nome { get; set; }
         public string Descricao { get; set; }
+        public string NomeCol { get; set; }
 
         IHttpContextAccessor HttpContextAccessor;
 
@@ -46,7 +47,31 @@ namespace SisPmsCore4.Models
                 lista.Add(item);
             }
             return lista;
+        }
 
+        public List<Cargo> FiltrarColaboradorPorCargo(int id)
+        {
+            List<Cargo> lista = new List<Cargo>();
+            Cargo item;
+
+            string id_usuario_logado = HttpContextAccessor.HttpContext.Session.GetString("IdUsuarioLogado");
+            string sql = " SELECT " +
+                " colaborador.nome as NomeCol, cargo.nome from colaborador " +
+                " inner join cargo on colaborador.cargo_idcargo = cargo.idcargo" +
+                $" where cargo.idcargo = {id} ";
+            DAL objDAL = new DAL();
+            DataTable dt = objDAL.RetDataTable(sql);
+
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                item = new Cargo();
+                item.idCargo = int.Parse(dt.Rows[i]["idcargo"].ToString());
+                item.Nome = dt.Rows[i]["nome"].ToString();
+                item.Descricao = dt.Rows[i]["descricao"].ToString();
+                item.NomeCol = dt.Rows[i]["NomeCol"].ToString();
+                lista.Add(item);
+            }
+            return lista;
         }
 
         public void SalvarNovoRegistro()

@@ -3,9 +3,8 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_LayoutSp.cshtml";
 
-    
-}
 
+}
 
 <form asp-action="FiltrarColaborador">
     <div class="input-group mb-3">
@@ -21,13 +20,13 @@
         <a class="nav-link" asp-area="" asp-controller="Colaborador" asp-action="Create">Add Novo</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" asp-area="" asp-controller="" asp-action="">Localizar por Setor</a>
+        <a class="nav-link" asp-area="" asp-controller="Colaborador" asp-action="FiltrarSetor">Localizar por Setor</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" asp-area="" asp-controller="" asp-action="">Localizar por Cargo</a>
+        <a class="nav-link" asp-area="" asp-controller="Colaborador" asp-action="FiltrarCargo">Localizar por Cargo</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" asp-area="" asp-controller="" asp-action="">Localizar por Ocorrência</a>
+        <a class="nav-link" asp-area="" asp-controller="Colaborador" asp-action="FiltrarOcorrencia">Localizar por Ocorrência</a>
     </li>
 </ul>
 

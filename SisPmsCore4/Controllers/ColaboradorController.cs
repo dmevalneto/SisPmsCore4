@@ -34,6 +34,42 @@ namespace SisPmsCore4.Controllers
             return View();
         }
 
+        public IActionResult FiltrarSetor()
+        {
+            ViewBag.ListaSetor = new Setor(HttpContextAccessor).ListaSetor();
+            return View();
+        }
+
+        public IActionResult FiltrarCargo()
+        {
+            ViewBag.ListaCargo = new Cargo(HttpContextAccessor).ListaCargo();
+            return View();
+        }
+
+        public IActionResult FiltrarOcorrencia()
+        {
+            ViewBag.ListaOcorrencia = new Ocorrencia(HttpContextAccessor).ListaOcorrencia();
+            return View();
+        }
+
+        public IActionResult FiltrarColaboradorPorSetor(int id)
+        {
+            ViewBag.FiltrarColaboradorPorSetor = new Colaborador(HttpContextAccessor).FiltrarColaboradorPorSetor(id);
+            return View();
+        }
+
+        public IActionResult FiltrarColaboradorPorCargo(int id)
+        {
+            ViewBag.FiltrarColaboradorPorCargo = new Colaborador(HttpContextAccessor).FiltrarColaboradorPorCargo(id);
+            return View();
+        }
+
+        public IActionResult FiltrarColaboradorPorOcorrencia(int id)
+        {
+            ViewBag.FiltrarColaboradorPorOcorrencia = new Colaborador(HttpContextAccessor).FiltrarColaboradorPorOcorrencia(id);
+            return View();
+        }
+
         [HttpGet]
         //Segunda view de encaminhamento persiste os dados de colaborador e seleciona os dados do setor a ser encaminhado cadastrando as info no banco
         //e redireciona para a action exibindo os dados do historico 

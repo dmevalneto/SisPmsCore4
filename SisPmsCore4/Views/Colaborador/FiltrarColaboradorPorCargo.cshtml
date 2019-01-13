@@ -1,0 +1,37 @@
+﻿@model Cargo
+@{
+    ViewData["Title"] = "FiltrarColaboradorPorCargo";
+    Layout = "~/Views/Shared/_LayoutSp.cshtml";
+}
+
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @*@Html.DisplayNameFor(model => model.Nome)*@
+                    Nome
+                </th>
+                <th>
+                    @*@Html.DisplayNameFor(model => model.NomeSe)*@
+                    Cargo
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in (List<Colaborador>)ViewBag.FiltrarColaboradorPorCargo)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NomeCargo)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

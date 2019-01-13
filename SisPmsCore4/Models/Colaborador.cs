@@ -11,6 +11,7 @@ namespace SisPmsCore4.Models
 {
     public class Colaborador
     {
+        [Display(Name = "Id")]
         public int idColaborador { get; set; }
         [Required(ErrorMessage = "Campo Obrigatório!")]
         public string Nome { get; set; }
@@ -26,8 +27,14 @@ namespace SisPmsCore4.Models
         public int ocorrencia_idocorrencia { get; set; }
         public int prestadora_servico_idprestadora_servico { get; set; }
 
+        [Display(Name = "Setor")]
         public string NomeSe { get; set; }
+        [Display(Name = "Codigo")]
+        public int CodigoSe { get; set; }
         public string GestorSe { get; set; }
+        public string NomeCargo { get; set; }
+        public string NumeroOco { get; set; }
+        public string DescOco { get; set; }
         IHttpContextAccessor HttpContextAccessor;
 
         public Colaborador()
@@ -53,7 +60,7 @@ namespace SisPmsCore4.Models
             //string sql = $"SELECT idcolaborador, nome, cpf, data_admissao, telefone, setor_idsetor, cargo_idcargo, ocorrencia_idocorrencia, prestadora_servico_idprestadora_servico FROM colaborador WHERE  nome LIKE '%{nome}%'";
             string sql = " SELECT " +
                 " colaborador.idcolaborador, colaborador.nome , colaborador.cpf, colaborador.data_admissao, colaborador.telefone, colaborador.setor_idsetor, colaborador.cargo_idcargo, colaborador.ocorrencia_idocorrencia, colaborador.prestadora_servico_idprestadora_servico , " +
-                " setor.nome as NomeSe " +
+                " setor.nome as NomeSe, setor.codigo as CodigoSe " +
                 " FROM colaborador " +
                 " inner join setor on colaborador.setor_idsetor = setor.idsetor " +
                 $" WHERE  colaborador.nome LIKE '%{nome}%' ";
@@ -73,6 +80,7 @@ namespace SisPmsCore4.Models
                 item.ocorrencia_idocorrencia = int.Parse(dt.Rows[i]["ocorrencia_idocorrencia"].ToString());
                 item.prestadora_servico_idprestadora_servico = int.Parse(dt.Rows[i]["prestadora_servico_idprestadora_servico"].ToString());
                 item.NomeSe = dt.Rows[i]["NomeSe"].ToString();
+                item.CodigoSe = int.Parse(dt.Rows[i]["CodigoSe"].ToString());
                 lista.Add(item);
             }
             return lista;
@@ -112,6 +120,64 @@ namespace SisPmsCore4.Models
             return lista;
 
         }
+
+        public List<Colaborador> FiltrarColaboradorPorCargo(int id)
+        {
+
+            List<Colaborador> lista = new List<Colaborador>();
+            Colaborador item;
+
+            string id_usuario_logado = HttpContextAccessor.HttpContext.Session.GetString("IdUsuarioLogado");
+            string sql = " SELECT" +
+                " colaborador.nome, cargo.nome as NomeCargo" +
+                " from colaborador" +
+                " inner join cargo on colaborador.cargo_idcargo = cargo.idcargo" +
+                $" where cargo.idcargo = {id} ORDER BY colaborador.nome";
+            DAL objDAL = new DAL();
+            DataTable dt = objDAL.RetDataTable(sql);
+
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                item = new Colaborador();
+                item.Nome = dt.Rows[i]["nome"].ToString();
+                item.NomeCargo = dt.Rows[i]["NomeCargo"].ToString();
+
+                lista.Add(item);
+            }
+
+            return lista;
+
+        }
+
+
+        public List<Colaborador> FiltrarColaboradorPorOcorrencia(int id)
+        {
+
+            List<Colaborador> lista = new List<Colaborador>();
+            Colaborador item;
+
+            string id_usuario_logado = HttpContextAccessor.HttpContext.Session.GetString("IdUsuarioLogado");
+            string sql = " SELECT" +
+                " colaborador.nome, ocorrencia.numero as NumeroOco, ocorrencia.descricao as DescOco from colaborador " +
+                " inner join ocorrencia on colaborador.ocorrencia_idocorrencia = ocorrencia.idocorrencia " +
+                $" where colaborador.ocorrencia_idocorrencia = {id} order by colaborador.nome ";
+            DAL objDAL = new DAL();
+            DataTable dt = objDAL.RetDataTable(sql);
+
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                item = new Colaborador();
+                item.Nome = dt.Rows[i]["nome"].ToString();
+                item.NumeroOco = dt.Rows[i]["NumeroOco"].ToString();
+                item.DescOco = dt.Rows[i]["DescOco"].ToString();
+
+                lista.Add(item);
+            }
+
+            return lista;
+
+        }
+
 
         public Colaborador CarregarRegistro(int? id)
         {

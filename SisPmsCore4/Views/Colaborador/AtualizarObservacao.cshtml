@@ -8,7 +8,6 @@
 
 <h2 class="text-center text-info">Observação</h2>
 <hr />
-@ViewBag.Desc.idhistorico
 <form asp-action="AtualizarObservacao">
     <div class="form-group">
         <label asp-for="idhistorico" class="control-label"></label>
@@ -20,6 +19,6 @@
         <input asp-for="observacao" class="form-control" value="@ViewBag.Desc.observacao" />
         <span asp-validation-for="observacao" class="text-danger"></span>
     </div>
-    <button type="submit" class="btn btn-primary">Salvar</button>
+    <button type="submit" class="btn btn-primary"><span class="fas fa-save"></span></button>
 </form>
 

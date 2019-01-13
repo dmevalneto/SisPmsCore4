@@ -1,0 +1,60 @@
+﻿@model Item
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutManutencao.cshtml";
+}
+
+<h2 class="text-center text-info">Item</h2>
+<hr />
+<p>
+    @*<a class="btn btn-default" asp-action="Create">Novo Registro</a>*@
+    <button class="btn btn-primary" onclick="NovoRegistro()">Novo Registro</button>
+</p>
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.IdItem)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nome)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Observacao)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in (List<Item>)ViewBag.ListaItem)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IdItem)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Observacao)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Editar", "Edit", new { id = item.IdItem }, new { @class = "btn btn-success" }) |
+                        @Html.ActionLink("Detalhes", "Details", new { id = item.IdItem }, new { @class = "btn btn-secondary" }) |
+                        @Html.ActionLink("Deletar", "Delete", new { id = item.IdItem }, new { @class = "btn btn-danger" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+<script>
+    function NovoRegistro() {
+        window.location.href = "../Item/Create";
+    }
+</script>
+
+

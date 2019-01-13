@@ -19,6 +19,9 @@
                 @Html.DisplayNameFor(model => model.Nome)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.CodigoSe)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.NomeSe)
             </th>
             <th>
@@ -27,61 +30,64 @@
             <th>
             </th>
             @*<th>
-                    @Html.DisplayNameFor(model => model.Telefone)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.setor_idsetor)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.cargo_idcargo)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ocorrencia_idocorrencia)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.prestadora_servico_idprestadora_servico)
-                </th>*@
+            @Html.DisplayNameFor(model => model.Telefone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.setor_idsetor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cargo_idcargo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ocorrencia_idocorrencia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.prestadora_servico_idprestadora_servico)
+        </th>*@
             <th></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in (List<Colaborador>)ViewBag.FiltrarColaborador)
         {
-            <tr>
-                @*<td>
-                        @Html.DisplayFor(modelItem => item.idColaborador)
-                    </td>*@
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nome)
-                </td>
-                <td style="background-color:antiquewhite; border:dotted">
-                    @Html.DisplayFor(modelItem => item.NomeSe)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DataAdmissao)
-                </td>
-                @*<td>
-                        @Html.DisplayFor(modelItem => item.Telefone)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.setor_idsetor)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.cargo_idcargo)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ocorrencia_idocorrencia)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.prestadora_servico_idprestadora_servico)
-                    </td>*@
-                <td>
-                    @Html.ActionLink("Editar", "Edit", new { id = item.idColaborador }, new { @class = "btn btn-success" }) |
-                    @Html.ActionLink("Detalhes", "PesquisarHistoricoPorColaborador", new {  id=item.idColaborador }, new { @class = "btn btn-secondary" }) |
-                    @Html.ActionLink("Deletar", "Delete", new { id = item.idColaborador }, new { @class = "btn btn-danger" }) |
-                    @Html.ActionLink("Encaminhar", "Encaminhar", new { id = item.idColaborador }, new { @class = "btn btn-dark" })
-                </td>
-            </tr>
+        <tr>
+            @*<td>
+            @Html.DisplayFor(modelItem => item.idColaborador)
+        </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td style="background-color:antiquewhite; border:dotted">
+                @Html.DisplayFor(modelItem => item.CodigoSe)
+            </td>
+            <td style="background-color:antiquewhite; border:dotted">
+                @Html.DisplayFor(modelItem => item.NomeSe)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataAdmissao)
+            </td>
+            @*<td>
+            @Html.DisplayFor(modelItem => item.Telefone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.setor_idsetor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cargo_idcargo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ocorrencia_idocorrencia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.prestadora_servico_idprestadora_servico)
+        </td>*@
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.idColaborador }, new { @class = "btn btn-success" }) |
+                @Html.ActionLink("Historico", "PesquisarHistoricoPorColaborador", new { id = item.idColaborador }, new { @class = "btn btn-secondary" }) |
+                @Html.ActionLink("Deletar", "Delete", new { id = item.idColaborador }, new { @class = "btn btn-danger" }) |
+                @Html.ActionLink("Encaminhar", "Encaminhar", new { id = item.idColaborador }, new { @class = "btn btn-dark" }) 
+            </td>
+        </tr>
         }
     </tbody>
 </table>

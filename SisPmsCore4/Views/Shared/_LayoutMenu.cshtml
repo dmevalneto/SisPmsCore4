@@ -41,9 +41,21 @@
     </div>
     <footer>
         <div class="row">
-            <div class="col-4 text-center"> <p>Error : @ViewBag.Error</p></div>
-            <div class="col-4 text-center"> <p>&copy; 2019 - SisPms</p></div>
-            <div class="col-4 text-center"> OnLine : @HttpContextAccessor.HttpContext.Session.GetString("NomeUsuarioLogado")</p></div>
+            <div class="col-10 text-center">
+                @{
+                    try
+                    {
+                        if (ViewBag.Error.ToString() != null)
+                        {
+                            <div class="alert alert-warning">
+                                <strong>Atenção!</strong> @ViewBag.Error
+                            </div>
+                        }
+                    }
+                    catch { }
+                }
+            </div>
+            <div class="col-2 text-center"> <p>&copy; 2019 - SisPms</p></div>
         </div>
     </footer>
     <script>

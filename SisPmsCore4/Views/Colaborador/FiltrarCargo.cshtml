@@ -1,0 +1,31 @@
+﻿@model Cargo
+@{
+    ViewData["Title"] = "FiltrarCargo";
+    Layout = "~/Views/Shared/_LayoutSp.cshtml";
+}
+
+<div class="table-responsive">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>
+                    Nome
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in (List<Cargo>)ViewBag.ListaCargo)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nome)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Selecionar", "FiltrarColaboradorPorCargo", new { id = item.idCargo }, new { @class = "btn btn-primary" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,39 @@
+﻿@model IEnumerable<SisPmsCore4.Models.Ocorrencia>
+
+@{
+    ViewData["Title"] = "FiltrarOcorrencia";
+    Layout = "~/Views/Shared/_LayoutSp.cshtml";
+}
+
+
+<div class="table-responsive">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>
+                    Numero
+                </th>
+                <th>
+                    Descrição
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in (List<Ocorrencia>)ViewBag.ListaOcorrencia)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Numero)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descricao)
+                </td>
+                <td>
+                    @Html.ActionLink("Selecionar", "FiltrarColaboradorPorOcorrencia", new { id = item.idOcorrencia }, new { @class = "btn btn-primary" })
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>

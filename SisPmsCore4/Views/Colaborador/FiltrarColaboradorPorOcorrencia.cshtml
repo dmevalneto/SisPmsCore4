@@ -1,0 +1,42 @@
+﻿@model Colaborador
+@{
+    ViewData["Title"] = "FiltrarColaboradorPorOcorrencia";
+    Layout = "~/Views/Shared/_LayoutSp.cshtml";
+}
+
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Nome
+                </th>
+                <th>
+                    Numero
+                </th>
+                <th>
+                    Descrição
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in (List<Colaborador>)ViewBag.FiltrarColaboradorPorOcorrencia)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumeroOco)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DescOco)
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
