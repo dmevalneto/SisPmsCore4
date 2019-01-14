@@ -1,0 +1,23 @@
+﻿@model HistoricoManutencao
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_LayoutManutencao.cshtml";
+}
+
+<h2 class="text-center text-info">Cargo</h2>
+<hr />
+
+<form asp-action="AddStatus">
+    <div class="form-group">
+        <label asp-for="status_manutencao_idstatus_manutencao" class="control-label">Setor</label>
+        <select class="form-control" asp-for="status_manutencao_idstatus_manutencao">
+            @{
+                foreach (var item in (List<StatusManutencao>)ViewBag.ListaStatusManutencao)
+                {
+                    <option value="@item.IdStatusManutencao">@item.Nome</option>
+                }
+            }
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Salvar</button>
+</form>

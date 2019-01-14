@@ -1,0 +1,70 @@
+﻿@model HistoricoManutencao
+@{
+    ViewData["Title"] = "ListarManutencao";
+    Layout = "~/Views/Shared/_LayoutManutencao.cshtml";
+}
+
+<h2 class="text-center text-info">Historico Manutenção</h2>
+<hr />
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Data)
+                </th>
+               
+                <th>
+                    @Html.DisplayNameFor(model => model.Observacao)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DataManut)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NomeSe)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NomeUsu)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NomeStatus)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in (List<HistoricoManutencao>)ViewBag.ListarHistoricoManutencao)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Data)
+                </td>
+               
+                <td>
+                    @Html.DisplayFor(modelItem => item.Observacao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataManut)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomeSe)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomeUsu)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomeStatus)
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+<script>
+    function NovoRegistro() {
+        window.location.href = "../Manutencao/Create";
+    }
+</script>
+

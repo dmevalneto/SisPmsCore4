@@ -64,7 +64,7 @@
                     @Html.DisplayFor(modelItem => item.NomeItem)
                 </td>
                 <td>
-                    @Html.ActionLink("Solicitar Reparo", "Edit", new { id = item.idManutencao }, new { @class = "btn btn-dark" }) 
+                    @Html.ActionLink("Add Status", "AddStatus", new { id = item.idManutencao }, new { @class = "btn btn-dark" }) 
                 </td>
             </tr>
             }

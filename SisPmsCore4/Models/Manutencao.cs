@@ -21,7 +21,7 @@ namespace SisPmsCore4.Models
         public string NomeSe { get; set; }
         public string NomeItem { get; set; }
 
-        IHttpContextAccessor HttpContextAccessor;
+       public IHttpContextAccessor HttpContextAccessor;
 
         public Manutencao()
         {
@@ -75,5 +75,7 @@ namespace SisPmsCore4.Models
             DAL objDAL = new DAL();
             objDAL.ExecutarComandoSQL(sql);
         }
+
+      
     }
 }
