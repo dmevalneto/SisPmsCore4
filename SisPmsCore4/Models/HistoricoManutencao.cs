@@ -21,6 +21,7 @@ namespace SisPmsCore4.Models
         public string NomeSe { get; set; }
         public string NomeUsu { get; set; }
         public string NomeStatus { get; set; }
+        public string NomeItem { get; set; }
 
 
         public IHttpContextAccessor HttpContextAccessor;
@@ -47,12 +48,14 @@ namespace SisPmsCore4.Models
                 " manutencao.observacao, manutencao.data as DataManut," +
                 " setor.nome as NomeSe," +
                 " usuario.nome as NomeUsu," +
-                " status_manutencao.nome as NomeStatus" +
+                " status_manutencao.nome as NomeStatus, " +
+                " item.nome as NomeItem " +
                 " from historico_manutencao" +
                 " inner join manutencao on manutencao.idmanutencao = historico_manutencao.manutencao_idmanutencao" +
                 " inner join setor on setor.idsetor = manutencao.setor_idsetor" +
                 " inner join usuario on usuario.idusuario = historico_manutencao.usuario_idusuario" +
                 " inner join status_manutencao on status_manutencao.idstatus_manutencao = historico_manutencao.status_manutencao_idstatus_manutencao " +
+                " inner join item on manutencao.item_iditem = item.iditem " +
                 " ORDER BY historico_manutencao.data DESC ";
 
 
@@ -72,6 +75,7 @@ namespace SisPmsCore4.Models
                 item.NomeSe = dt.Rows[i]["NomeSe"].ToString();
                 item.NomeUsu = dt.Rows[i]["NomeUsu"].ToString();
                 item.NomeStatus = dt.Rows[i]["NomeStatus"].ToString();
+                item.NomeItem = dt.Rows[i]["NomeItem"].ToString();
                 lista.Add(item);
             }
             return lista;
