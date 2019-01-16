@@ -48,8 +48,42 @@ namespace SisPmsCore4.Controllers
             formulario.manutencao_idmanutencao = int.Parse(ViewBag.idManutencao);
             formulario.HttpContextAccessor = HttpContextAccessor;
             formulario.AddStatus();
+            return RedirectToAction("AtualizarFlgManutencao");
+        }
+
+        public IActionResult AtualizarFlgManutencao()
+        {
+            ViewBag.idManutencao = TempData["idManutencao"].ToString();
+            Manutencao objHistorico = new Manutencao();
+            objHistorico.idManutencao = int.Parse(ViewBag.idManutencao);
+            objHistorico.AtualizarFlgManutencao();
             return RedirectToAction("ListarHistoricoManutencao");
         }
+
+        [HttpGet]
+        public IActionResult NovaOs(int id, int idmanut)
+        {
+            TempData["Os"] = id;
+            TempData.Keep("Os");
+
+            TempData["IdManut"] = idmanut;
+            TempData.Keep("IdManut");
+            ViewBag.ListaStatusManutencao = new StatusManutencao(HttpContextAccessor).ListaStatusManutencao();
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult NovaOs(HistoricoManutencao formulario)
+        {
+            HistoricoManutencao objHistoricoManutencao = new HistoricoManutencao(HttpContextAccessor);
+            objHistoricoManutencao.Os = int.Parse(TempData["Os"].ToString());
+            objHistoricoManutencao.manutencao_idmanutencao = int.Parse(TempData["IdManut"].ToString());
+            objHistoricoManutencao.status_manutencao_idstatus_manutencao = formulario.status_manutencao_idstatus_manutencao;
+            objHistoricoManutencao.NovaOs();
+            return RedirectToAction("ListarHistoricoManutencao");
+        }
+
+       
 
         // GET: Ocorrencia/Create
         public ActionResult Create()

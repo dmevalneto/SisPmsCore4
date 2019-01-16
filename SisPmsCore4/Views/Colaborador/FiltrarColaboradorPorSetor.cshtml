@@ -16,20 +16,25 @@
                     @*@Html.DisplayNameFor(model => model.NomeSe)*@
                     Setor
                 </th>
-                <th></th>
+                <th>
+                    Cargo
+                </th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in (List<Colaborador>)ViewBag.FiltrarColaboradorPorSetor)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Nome)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.NomeSe)
-                    </td>
-                </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomeSe)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomeCargo)
+                </td>
+            </tr>
             }
         </tbody>
     </table>

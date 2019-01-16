@@ -13,8 +13,9 @@ namespace SisPmsCore4.Models
         public int idManutencao { get; set; }
         public string Observacao { get; set; }
         public int Quantidade { get; set; }
-        public string Situacao { get; set; }
+        public string Prioridade { get; set; }
         public string Data { get; set; }
+        public int Flg { get; set; }
         public int setor_idsetor { get; set; }
         public int item_iditem { get; set; }
 
@@ -41,12 +42,13 @@ namespace SisPmsCore4.Models
 
             string id_usuario_logado = HttpContextAccessor.HttpContext.Session.GetString("IdUsuarioLogado");
             string sql = "SELECT" +
-                " manutencao.idmanutencao, manutencao.observacao, manutencao.quantidade, manutencao.situacao, manutencao.data, manutencao.setor_idsetor, manutencao.item_iditem," +
+                " manutencao.idmanutencao, manutencao.observacao, manutencao.quantidade, manutencao.prioridade, manutencao.data, manutencao.setor_idsetor, manutencao.item_iditem," +
                 " setor.nome as NomeSe," +
                 " item.nome as NomeItem " +
                 " FROM 9256_sispmscore.manutencao" +
                 " inner join setor on manutencao.setor_idsetor = setor.idsetor" +
-                " inner join item on manutencao.item_iditem = item.iditem  ";
+                " inner join item on manutencao.item_iditem = item.iditem  " +
+                " WHERE flg = 0 ";
             DAL objDAL = new DAL();
             DataTable dt = objDAL.RetDataTable(sql);
 
@@ -56,7 +58,7 @@ namespace SisPmsCore4.Models
                 item.idManutencao = int.Parse(dt.Rows[i]["idmanutencao"].ToString());
                 item.Observacao = dt.Rows[i]["observacao"].ToString();
                 item.Quantidade = int.Parse(dt.Rows[i]["quantidade"].ToString());
-                item.Situacao = dt.Rows[i]["situacao"].ToString();
+                item.Prioridade = dt.Rows[i]["prioridade"].ToString();
                 item.Data = DateTime.Parse(dt.Rows[i]["data"].ToString()).ToString("dd/MM/yyy");
                 item.setor_idsetor = int.Parse(dt.Rows[i]["setor_idsetor"].ToString());
                 item.item_iditem = int.Parse(dt.Rows[i]["item_iditem"].ToString());
@@ -71,11 +73,18 @@ namespace SisPmsCore4.Models
         public void SalvarNovoRegistro()
         {
             var data = DateTime.Now.ToString("yyyy/MM/dd");
-            string sql = $"INSERT INTO manutencao (observacao, quantidade, situacao, data, setor_idsetor, item_iditem) VALUES ('{Observacao}', '{Quantidade}', '{Situacao}', '{data}', '{setor_idsetor}', '{item_iditem}')";
+            string sql = $"INSERT INTO manutencao (observacao, quantidade, prioridade, data, flg, setor_idsetor, item_iditem) VALUES ('{Observacao}', '{Quantidade}', '{Prioridade}', '{data}', 0, '{setor_idsetor}', '{item_iditem}')";
             DAL objDAL = new DAL();
             objDAL.ExecutarComandoSQL(sql);
         }
 
-      
+
+        public void AtualizarFlgManutencao()
+        {
+            string sql = $"UPDATE manutencao SET flg = 1 WHERE  idmanutencao = {idManutencao}";
+            DAL objDAL = new DAL();
+            objDAL.ExecutarComandoSQL(sql);
+        }
+
     }
 }

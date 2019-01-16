@@ -94,12 +94,14 @@ namespace SisPmsCore4.Models
             Colaborador item;
 
             string id_usuario_logado = HttpContextAccessor.HttpContext.Session.GetString("IdUsuarioLogado");
-            string sql = " select " +
-                " colaborador.idcolaborador, colaborador.nome, colaborador.cpf, colaborador.data_admissao, colaborador.telefone, " +
-                " setor.nome as NomeSe, setor.gestor as GestorSe " +
-                " from colaborador " +
-                " inner join setor on colaborador.setor_idsetor = setor.idsetor " +
-                $" where setor_idsetor = {id} ";
+            string sql = " select  " +
+                "  colaborador.idcolaborador, colaborador.nome, colaborador.cpf, colaborador.data_admissao, colaborador.telefone,  " +
+                "  setor.nome as NomeSe, setor.gestor as GestorSe, " +
+                "  cargo.nome as NomeCargo " +
+                "  from colaborador  " +
+                "  inner join setor on colaborador.setor_idsetor = setor.idsetor" +
+                "  inner join cargo on colaborador.cargo_idcargo = cargo.idcargo" +
+                $"  where setor_idsetor = {id}  ";
             DAL objDAL = new DAL();
             DataTable dt = objDAL.RetDataTable(sql);
 
@@ -113,6 +115,7 @@ namespace SisPmsCore4.Models
                 item.Telefone = dt.Rows[i]["telefone"].ToString();
                 item.NomeSe = dt.Rows[i]["NomeSe"].ToString();
                 item.GestorSe = dt.Rows[i]["GestorSe"].ToString();
+                item.NomeCargo = dt.Rows[i]["NomeCargo"].ToString();
 
                 lista.Add(item);
             }
@@ -128,11 +131,18 @@ namespace SisPmsCore4.Models
             Colaborador item;
 
             string id_usuario_logado = HttpContextAccessor.HttpContext.Session.GetString("IdUsuarioLogado");
-            string sql = " SELECT" +
-                " colaborador.nome, cargo.nome as NomeCargo" +
-                " from colaborador" +
-                " inner join cargo on colaborador.cargo_idcargo = cargo.idcargo" +
-                $" where cargo.idcargo = {id} ORDER BY colaborador.nome";
+            //string sql = " SELECT" +
+            //    " colaborador.nome, cargo.nome as NomeCargo" +
+            //    " from colaborador" +
+            //    " inner join cargo on colaborador.cargo_idcargo = cargo.idcargo" +
+            //    $" where cargo.idcargo = {id} ORDER BY colaborador.nome";
+            string sql = " SELECT " +
+                " colaborador.nome, cargo.nome as NomeCargo," +
+                " setor.nome as NomeSe " +
+                " from colaborador " +
+                " inner join cargo on colaborador.cargo_idcargo = cargo.idcargo  " +
+                " inner join setor on colaborador.setor_idsetor = setor.idsetor" +
+                $" where cargo.idcargo = {id} ORDER BY colaborador.nome ";
             DAL objDAL = new DAL();
             DataTable dt = objDAL.RetDataTable(sql);
 
@@ -141,6 +151,7 @@ namespace SisPmsCore4.Models
                 item = new Colaborador();
                 item.Nome = dt.Rows[i]["nome"].ToString();
                 item.NomeCargo = dt.Rows[i]["NomeCargo"].ToString();
+                item.NomeSe = dt.Rows[i]["NomeSe"].ToString();
 
                 lista.Add(item);
             }
@@ -158,9 +169,12 @@ namespace SisPmsCore4.Models
 
             string id_usuario_logado = HttpContextAccessor.HttpContext.Session.GetString("IdUsuarioLogado");
             string sql = " SELECT" +
-                " colaborador.nome, ocorrencia.numero as NumeroOco, ocorrencia.descricao as DescOco from colaborador " +
-                " inner join ocorrencia on colaborador.ocorrencia_idocorrencia = ocorrencia.idocorrencia " +
-                $" where colaborador.ocorrencia_idocorrencia = {id} order by colaborador.nome ";
+              " colaborador.nome, ocorrencia.numero as NumeroOco, ocorrencia.descricao as DescOco, " +
+              " cargo.nome as NomeCargo " +
+              " from colaborador " +
+              " inner join ocorrencia on colaborador.ocorrencia_idocorrencia = ocorrencia.idocorrencia " +
+              " inner join cargo on colaborador.cargo_idcargo = cargo.idcargo " +
+              $" where colaborador.ocorrencia_idocorrencia = {id} order by colaborador.nome ";
             DAL objDAL = new DAL();
             DataTable dt = objDAL.RetDataTable(sql);
 
@@ -170,6 +184,7 @@ namespace SisPmsCore4.Models
                 item.Nome = dt.Rows[i]["nome"].ToString();
                 item.NumeroOco = dt.Rows[i]["NumeroOco"].ToString();
                 item.DescOco = dt.Rows[i]["DescOco"].ToString();
+                item.NomeCargo = dt.Rows[i]["NomeCargo"].ToString();
 
                 lista.Add(item);
             }

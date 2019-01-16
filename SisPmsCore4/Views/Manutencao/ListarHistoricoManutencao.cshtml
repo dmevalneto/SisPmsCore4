@@ -4,12 +4,35 @@
     Layout = "~/Views/Shared/_LayoutManutencao.cshtml";
 }
 
-<h2 class="text-center text-info">Historico Manutenção</h2>
+<h2 class="text-center text-info">Filtrar Por</h2>
 <hr />
+<ul class="nav justify-content-center">
+    <li class="nav-item">
+        <a class="nav-link" asp-area="" asp-controller="Colaborador" asp-action="Create">Setor</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" asp-area="" asp-controller="Colaborador" asp-action="FiltrarSetor">Bairro</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" asp-area="" asp-controller="Colaborador" asp-action="FiltrarCargo">O.S</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" asp-area="" asp-controller="Colaborador" asp-action="FiltrarCargo">Concluido</a>
+    </li>
+</ul>
+
+
+
 <div class="table-responsive">
     <table class="table">
         <thead>
             <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.NomeSe)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BairroSe)
+                </th>
                 <th>
                     @Html.DisplayNameFor(model => model.NomeItem)
                 </th>
@@ -17,13 +40,13 @@
                     @Html.DisplayNameFor(model => model.Data)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Observacao)
+                    @Html.DisplayNameFor(model => model.Os)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.manutencao_idmanutencao)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.DataManut)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.NomeSe)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.NomeUsu)
@@ -37,30 +60,38 @@
         <tbody>
             @foreach (var item in (List<HistoricoManutencao>)ViewBag.ListarHistoricoManutencao)
             {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NomeItem)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Data)
-                </td>
-
-                <td>
-                    @Html.DisplayFor(modelItem => item.Observacao)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DataManut)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NomeSe)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NomeUsu)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NomeStatus)
-                </td>
-            </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NomeSe)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BairroSe)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NomeItem)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Data)
+                    </td>
+                    <td style="background-color:antiquewhite; border:dotted">
+                        @Html.DisplayFor(modelItem => item.Os)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.manutencao_idmanutencao)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DataManut)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NomeUsu)
+                    </td>
+                    <td style="background-color:antiquewhite; border:dotted">
+                        @Html.DisplayFor(modelItem => item.NomeStatus)
+                    </td>
+                    <td>
+                        @Html.ActionLink("O.S", "NovaOs", new { id = item.Os, idmanut = item.manutencao_idmanutencao }, new { @class = "btn btn-dark" })
+                    </td>
+                </tr>
             }
         </tbody>
     </table>
