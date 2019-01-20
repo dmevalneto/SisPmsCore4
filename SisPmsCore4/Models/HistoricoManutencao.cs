@@ -2,6 +2,7 @@
 using SisPmsCore4.Util;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,19 +11,29 @@ namespace SisPmsCore4.Models
 {
     public class HistoricoManutencao
     {
+        [Display(Name = "Id")]
         public int idHistoricoManutencao { get; set; }
+        [Display(Name = "Data Atendida")]
         public string Data { get; set; }
+        [Display(Name = "O.S")]
         public int Os { get; set; }
         public int manutencao_idmanutencao { get; set; }
         public int status_manutencao_idstatus_manutencao { get; set; }
         public int usuario_idusuario { get; set; }
 
+        [Display(Name = "Observação")]
         public string Observacao { get; set; }
+        [Display(Name = "Data Solicitação")]
         public string DataManut { get; set; }
+        [Display(Name = "Setor")]
         public string NomeSe { get; set; }
+        [Display(Name = "Bairro")]
         public string BairroSe { get; set; }
+        [Display(Name = "Responsavel")]
         public string NomeUsu { get; set; }
+        [Display(Name = "Status")]
         public string NomeStatus { get; set; }
+        [Display(Name = "Item")]
         public string NomeItem { get; set; }
 
 
@@ -59,7 +70,7 @@ namespace SisPmsCore4.Models
                 " inner join usuario on usuario.idusuario = historico_manutencao.usuario_idusuario" +
                 " inner join status_manutencao on status_manutencao.idstatus_manutencao = historico_manutencao.status_manutencao_idstatus_manutencao " +
                 " inner join item on manutencao.item_iditem = item.iditem " +
-                " WHERE manutencao.flg = 1  " +
+                " WHERE manutencao.flg = 11  " +
                 " ORDER BY historico_manutencao.data DESC ";
 
 
@@ -87,12 +98,14 @@ namespace SisPmsCore4.Models
             return lista;
         }
 
+     
+
 
         public void AddStatus()
         {
             string id_usuario_logado = HttpContextAccessor.HttpContext.Session.GetString("IdUsuarioLogado");
             var data = DateTime.Now.ToString("yyyy/MM/dd");
-            string sql = $"INSERT INTO historico_manutencao (data, os, manutencao_idmanutencao, status_manutencao_idstatus_manutencao, usuario_idusuario) VALUES ('{data}', '{Os}', '{manutencao_idmanutencao}', '{status_manutencao_idstatus_manutencao}', '{id_usuario_logado}')";
+            string sql = $"INSERT INTO historico_manutencao (data, os, manutencao_idmanutencao, status_manutencao_idstatus_manutencao, usuario_idusuario) VALUES ('{data}', '{Os}', '{manutencao_idmanutencao}', 11, '{id_usuario_logado}')";
             DAL objDAL = new DAL();
             objDAL.ExecutarComandoSQL(sql);
         }
@@ -101,7 +114,7 @@ namespace SisPmsCore4.Models
         {
             string id_usuario_logado = HttpContextAccessor.HttpContext.Session.GetString("IdUsuarioLogado");
             var data = DateTime.Now.ToString("yyyy/MM/dd");
-            string sql = $"INSERT INTO historico_manutencao (data, os, manutencao_idmanutencao, status_manutencao_idstatus_manutencao, usuario_idusuario) VALUES ('{data}', '{Os}', '{manutencao_idmanutencao}', '{status_manutencao_idstatus_manutencao}', '{id_usuario_logado}')";
+            string sql = $"INSERT INTO historico_manutencao (data, os, manutencao_idmanutencao, status_manutencao_idstatus_manutencao, usuario_idusuario) VALUES ('{data}', '{Os}', '{manutencao_idmanutencao}', 10, '{id_usuario_logado}')";
             DAL objDAL = new DAL();
             objDAL.ExecutarComandoSQL(sql);
         }

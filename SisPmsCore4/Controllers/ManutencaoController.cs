@@ -32,6 +32,23 @@ namespace SisPmsCore4.Controllers
             return View();
         }
 
+        public IActionResult ListarManutencaoConcluidas()
+        {
+            ViewBag.ListarManutencaoConcluidas = new Manutencao(HttpContextAccessor).ListaManutencaoConcluidas();
+            return View();
+        }
+
+        public IActionResult ListarSetor()
+        {
+            ViewBag.ListaSetor = new Setor(HttpContextAccessor).ListaSetor();
+            return View();
+        }
+        public IActionResult FiltrarManutencaoPorSetor(int id)
+        {
+            ViewBag.FiltrarManutencaoPorSetor = new Manutencao(HttpContextAccessor).FiltrarManutencaoPorSetor(id);
+            return View();
+        }
+
         [HttpGet]
         public IActionResult AddStatus(int id)
         {
@@ -60,6 +77,10 @@ namespace SisPmsCore4.Controllers
             return RedirectToAction("ListarHistoricoManutencao");
         }
 
+
+      
+
+
         [HttpGet]
         public IActionResult NovaOs(int id, int idmanut)
         {
@@ -80,6 +101,9 @@ namespace SisPmsCore4.Controllers
             objHistoricoManutencao.manutencao_idmanutencao = int.Parse(TempData["IdManut"].ToString());
             objHistoricoManutencao.status_manutencao_idstatus_manutencao = formulario.status_manutencao_idstatus_manutencao;
             objHistoricoManutencao.NovaOs();
+            Manutencao objManutencao = new Manutencao();
+            int id = int.Parse(TempData["IdManut"].ToString());
+            objManutencao.AtualizarFlgManutencaoConcluido(id);
             return RedirectToAction("ListarHistoricoManutencao");
         }
 

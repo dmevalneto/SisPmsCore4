@@ -4,22 +4,6 @@
     Layout = "~/Views/Shared/_LayoutManutencao.cshtml";
 }
 
-<h2 class="text-center text-info">Filtrar Por</h2>
-<hr />
-<ul class="nav justify-content-center">
-    <li class="nav-item">
-        <a class="nav-link" asp-area="" asp-controller="Colaborador" asp-action="Create">Setor</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" asp-area="" asp-controller="Colaborador" asp-action="FiltrarSetor">Bairro</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" asp-area="" asp-controller="Colaborador" asp-action="FiltrarCargo">O.S</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" asp-area="" asp-controller="Colaborador" asp-action="FiltrarCargo">Concluido</a>
-    </li>
-</ul>
 
 
 
@@ -42,9 +26,9 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Os)
                 </th>
-                <th>
+                @*<th>
                     @Html.DisplayNameFor(model => model.manutencao_idmanutencao)
-                </th>
+                </th>*@
                 <th>
                     @Html.DisplayNameFor(model => model.DataManut)
                 </th>
@@ -76,9 +60,9 @@
                     <td style="background-color:antiquewhite; border:dotted">
                         @Html.DisplayFor(modelItem => item.Os)
                     </td>
-                    <td>
+                    @*<td>
                         @Html.DisplayFor(modelItem => item.manutencao_idmanutencao)
-                    </td>
+                    </td>*@
                     <td>
                         @Html.DisplayFor(modelItem => item.DataManut)
                     </td>
@@ -89,7 +73,7 @@
                         @Html.DisplayFor(modelItem => item.NomeStatus)
                     </td>
                     <td>
-                        @Html.ActionLink("O.S", "NovaOs", new { id = item.Os, idmanut = item.manutencao_idmanutencao }, new { @class = "btn btn-dark" })
+                        @Html.ActionLink("Concluir", "NovaOs", new { id = item.Os, idmanut = item.manutencao_idmanutencao }, new { @class = "btn btn-dark" })
                     </td>
                 </tr>
             }

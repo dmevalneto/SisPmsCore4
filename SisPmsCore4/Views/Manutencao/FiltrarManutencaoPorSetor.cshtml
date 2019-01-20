@@ -9,11 +9,6 @@
 
 
 <h2 class="text-center text-info">Manutencao</h2>
-<hr />
-<p>
-    @*<a class="btn btn-default" asp-action="Create">Novo Registro</a>*@
-    <button class="btn btn-primary" onclick="NovoRegistro()">Novo Registro</button>
-</p>
 <div class="table-responsive">
     <table class="table">
         <thead>
@@ -22,8 +17,8 @@
                     @Html.DisplayNameFor(model => model.NomeSe)
                 </th>
                 @*<th>
-                    @Html.DisplayNameFor(model => model.idManutencao)
-                </th>*@
+            @Html.DisplayNameFor(model => model.idManutencao)
+        </th>*@
                 <th>
                     @Html.DisplayNameFor(model => model.Observacao)
                 </th>
@@ -40,19 +35,27 @@
                 <th>
                     @Html.DisplayNameFor(model => model.NomeItem)
                 </th>
-                <th></th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Os)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DataAtendida)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in (List<Manutencao>)ViewBag.ListaManutencao)
+            @foreach (var item in (List<Manutencao>)ViewBag.FiltrarManutencaoPorSetor)
             {
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.NomeSe)
                 </td>
                 @*<td>
-                    @Html.DisplayFor(modelItem => item.idManutencao)
-                </td>*@
+            @Html.DisplayFor(modelItem => item.idManutencao)
+        </td>*@
                 <td>
                     @Html.DisplayFor(modelItem => item.Observacao)
                 </td>
@@ -70,7 +73,13 @@
                     @Html.DisplayFor(modelItem => item.NomeItem)
                 </td>
                 <td>
-                    @Html.ActionLink("O.S", "AddStatus", new { id = item.idManutencao }, new { @class = "btn btn-dark" })
+                    @Html.DisplayFor(modelItem => item.Os)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataAtendida)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
                 </td>
             </tr>
             }

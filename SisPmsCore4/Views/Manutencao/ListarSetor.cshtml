@@ -1,0 +1,50 @@
+﻿@model Setor
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutSp.cshtml";
+}
+
+
+<h2 class="text-center text-info">Setor</h2>
+<hr />
+<p>
+</p>
+<div class="table-responsive">
+    <table class="table table-sm">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Codigo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nome)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Gestor)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in (List<Setor>)ViewBag.ListaSetor)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Codigo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Gestor)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Selecione", "FiltrarManutencaoPorSetor", new { id = item.idSetor }, new { @class = "btn btn-success btn-sm" }) 
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+

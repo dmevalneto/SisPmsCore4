@@ -4,16 +4,15 @@
     Layout = "~/Views/Shared/_LayoutManutencao.cshtml";
 }
 
-<h2 class="text-center text-info">O.S</h2>
+<h2 class="text-center text-info">N° O.S</h2>
 <hr />
 
 <form asp-action="AddStatus">
     <div class="form-group">
-        <label asp-for="Os" class="control-label"></label>
         <input asp-for="Os" class="form-control" />
         <span asp-validation-for="Os" class="text-danger"></span>
     </div>
-    <div class="form-group">
+    @*<div class="form-group">
         <label asp-for="status_manutencao_idstatus_manutencao" class="control-label">Setor</label>
         <select class="form-control" asp-for="status_manutencao_idstatus_manutencao">
             @{
@@ -23,6 +22,6 @@
                 }
             }
         </select>
-    </div>
+    </div>*@
     <button type="submit" class="btn btn-primary">Salvar</button>
 </form>

@@ -8,7 +8,7 @@
 
 
 
-<h2 class="text-center text-info">Manutencao</h2>
+<h2 class="text-center text-info">Relação de Demandas Concluidas</h2>
 <hr />
 <p>
     @*<a class="btn btn-default" asp-action="Create">Novo Registro</a>*@
@@ -22,8 +22,8 @@
                     @Html.DisplayNameFor(model => model.NomeSe)
                 </th>
                 @*<th>
-                    @Html.DisplayNameFor(model => model.idManutencao)
-                </th>*@
+                        @Html.DisplayNameFor(model => model.idManutencao)
+                    </th>*@
                 <th>
                     @Html.DisplayNameFor(model => model.Observacao)
                 </th>
@@ -44,35 +44,32 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in (List<Manutencao>)ViewBag.ListaManutencao)
+            @foreach (var item in (List<Manutencao>)ViewBag.ListarManutencaoConcluidas)
             {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NomeSe)
-                </td>
-                @*<td>
-                    @Html.DisplayFor(modelItem => item.idManutencao)
-                </td>*@
-                <td>
-                    @Html.DisplayFor(modelItem => item.Observacao)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Quantidade)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Prioridade)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Data)
-                </td>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NomeSe)
+                    </td>
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.idManutencao)
+                        </td>*@
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Observacao)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quantidade)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Prioridade)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Data)
+                    </td>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.NomeItem)
-                </td>
-                <td>
-                    @Html.ActionLink("O.S", "AddStatus", new { id = item.idManutencao }, new { @class = "btn btn-dark" })
-                </td>
-            </tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NomeItem)
+                    </td>
+                </tr>
             }
         </tbody>
     </table>
