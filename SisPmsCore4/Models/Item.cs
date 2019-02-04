@@ -34,7 +34,7 @@ namespace SisPmsCore4.Models
             Item item;
 
             string id_usuario_logado = HttpContextAccessor.HttpContext.Session.GetString("IdUsuarioLogado");
-            string sql = "SELECT * FROM item";
+            string sql = "SELECT iditem, nome, observacao FROM item order by nome";
             DAL objDAL = new DAL();
             DataTable dt = objDAL.RetDataTable(sql);
 
@@ -53,6 +53,29 @@ namespace SisPmsCore4.Models
         public void SalvarNovoRegistro()
         {
             string sql = $"INSERT INTO item (nome, observacao) VALUES ('{Nome}', '{Observacao}')";
+            DAL objDAL = new DAL();
+            objDAL.ExecutarComandoSQL(sql);
+        }
+
+
+        public Item CarregarRegistro(int? id)
+        {
+            Item item = new Item();
+            string sql = $"SELECT iditem, nome, observacao FROM item WHERE iditem = {id}";
+            DAL objDAL = new DAL();
+            DataTable dt = objDAL.RetDataTable(sql);
+
+            item.IdItem = int.Parse(dt.Rows[0]["iditem"].ToString());
+            item.Nome = dt.Rows[0]["nome"].ToString();
+            item.Observacao = dt.Rows[0]["observacao"].ToString();
+
+            return item;
+        }
+
+
+        public void AtualizarRegistro()
+        {
+            string sql = $"UPDATE item SET nome = '{Nome}', observacao = '{Observacao}' WHERE  iditem = {IdItem}";
             DAL objDAL = new DAL();
             objDAL.ExecutarComandoSQL(sql);
         }

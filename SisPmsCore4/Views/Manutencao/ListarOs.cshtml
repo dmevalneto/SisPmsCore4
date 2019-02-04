@@ -1,0 +1,38 @@
+﻿@model HistoricoManutencao
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutManutencao.cshtml";
+}
+
+
+<h2 class="text-center text-info">Setor</h2>
+<hr />
+<p>
+</p>
+<div class="table-responsive">
+    <table class="table table-sm">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Os)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in (List<HistoricoManutencao>)ViewBag.ListarOs)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Os)
+                </td>
+                <td>
+                    @Html.ActionLink("Selecione", "FiltrarPorOs", new { id = item.Os, status = item.status_manutencao_idstatus_manutencao }, new { @class = "btn btn-success btn-sm" })
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+

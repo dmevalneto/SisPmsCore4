@@ -1,0 +1,43 @@
+﻿@model Manutencao
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutManutencao.cshtml";
+
+
+}
+
+<form asp-action="FiltrarManutencaoPorSetorPorStatus">
+    <div class="row">
+        <div class="col-6">
+            <div class="form-group">
+                <label asp-for="setor_idsetor" class="control-label">Setor</label>
+                <select class="form-control" asp-for="setor_idsetor">
+                    @{
+                        foreach (var item in (List<Setor>)ViewBag.ListaSetor)
+                        {
+                            <option value="@item.idSetor">@item.Nome</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-group">
+                <label asp-for="Flg" class="control-label">Status</label>
+                <select class="form-control" asp-for="Flg">
+                    @{
+                        foreach (var item in (List<StatusManutencao>)ViewBag.ListaStatusManutencao)
+                        {
+                            <option value="@item.IdStatusManutencao">@item.Nome</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+   
+    <button type="submit" class="btn btn-primary"><span class="fas fa-filter"></span> Filtrar</button>
+</form>
+
+
+

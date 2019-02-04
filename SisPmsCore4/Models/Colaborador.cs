@@ -137,12 +137,12 @@ namespace SisPmsCore4.Models
             //    " inner join cargo on colaborador.cargo_idcargo = cargo.idcargo" +
             //    $" where cargo.idcargo = {id} ORDER BY colaborador.nome";
             string sql = " SELECT " +
-                " colaborador.nome, cargo.nome as NomeCargo," +
+                " colaborador.nome, cargo.nome as NomeCargo, setor.codigo as CodigoSe, " +
                 " setor.nome as NomeSe " +
                 " from colaborador " +
                 " inner join cargo on colaborador.cargo_idcargo = cargo.idcargo  " +
                 " inner join setor on colaborador.setor_idsetor = setor.idsetor" +
-                $" where cargo.idcargo = {id} ORDER BY colaborador.nome ";
+                $" where cargo.idcargo = {id} ORDER BY setor.codigo ";
             DAL objDAL = new DAL();
             DataTable dt = objDAL.RetDataTable(sql);
 
@@ -152,6 +152,7 @@ namespace SisPmsCore4.Models
                 item.Nome = dt.Rows[i]["nome"].ToString();
                 item.NomeCargo = dt.Rows[i]["NomeCargo"].ToString();
                 item.NomeSe = dt.Rows[i]["NomeSe"].ToString();
+                item.CodigoSe = int.Parse(dt.Rows[i]["CodigoSe"].ToString());
 
                 lista.Add(item);
             }
@@ -255,6 +256,13 @@ namespace SisPmsCore4.Models
         {
             string dataAdmissao = DateTime.Parse(DataAdmissao).ToString("yyyy/MM/dd");
             string sql = $"UPDATE colaborador SET nome = '{Nome}', cpf = '{Cpf}', data_admissao = '{dataAdmissao}', telefone = '{Telefone}', setor_idsetor = '{setor_idsetor}', cargo_idcargo = '{cargo_idcargo}', ocorrencia_idocorrencia = '{ocorrencia_idocorrencia}', prestadora_servico_idprestadora_servico = '{prestadora_servico_idprestadora_servico}' WHERE  idcolaborador = {idColaborador}";
+            DAL objDAL = new DAL();
+            objDAL.ExecutarComandoSQL(sql);
+        }
+
+        public void AtualizarColaborador()
+        {
+            string sql = $"UPDATE colaborador SET  setor_idsetor = '{setor_idsetor}' WHERE  idcolaborador = {idColaborador}";
             DAL objDAL = new DAL();
             objDAL.ExecutarComandoSQL(sql);
         }

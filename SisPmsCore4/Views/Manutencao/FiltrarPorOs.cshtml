@@ -1,0 +1,68 @@
+﻿@model HistoricoManutencao
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutManutencao.cshtml";
+}
+
+
+<h2 class="text-center text-info">Filtro por Os</h2>
+<hr />
+<p>
+</p>
+<div class="table-responsive">
+    <table class="table table-sm">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Os)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NomeSe)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BairroSe)
+                </th>
+                <th style="background-color:antiquewhite; border:dotted">
+                    @Html.DisplayNameFor(model => model.NomeItem)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Data)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DataManut)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in (List<HistoricoManutencao>)ViewBag.FiltrarPorOs)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Os)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomeSe)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BairroSe)
+                </td>
+                <td style="background-color:antiquewhite; border:dotted">
+                    @Html.DisplayFor(modelItem => item.NomeItem)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Data)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataManut)
+                </td>
+                <td>
+                    @Html.ActionLink("Concluir", "NovaOs", new { id = item.Os, idmanut = item.manutencao_idmanutencao }, new { @class = "btn btn-dark" })
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+

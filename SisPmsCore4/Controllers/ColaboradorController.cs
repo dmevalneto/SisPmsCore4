@@ -84,6 +84,10 @@ namespace SisPmsCore4.Controllers
                 objHistorico.setor_idsetor = ViewBag.idSetor;
                 objHistorico.data = DateTime.Now.ToString();
                 objHistorico.Encaminhar();
+                Colaborador objColaborador = new Colaborador();
+                objColaborador.setor_idsetor = ViewBag.idSetor;
+                objColaborador.idColaborador = int.Parse(ViewBag.idColaborador);
+                objColaborador.AtualizarColaborador();
                 return RedirectToAction("HistoricoColaborador");
             }
             catch (Exception)

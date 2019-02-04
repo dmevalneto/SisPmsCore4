@@ -59,27 +59,24 @@ namespace SisPmsCore4.Controllers
             }
         }
 
-        // GET: Item/Edit/5
-        public IActionResult Edit(int id)
+        // GET: Colaborador/Edit/5
+        public ActionResult Edit(int? id)
         {
-            return View();
+            Item objItem = new Item();
+            return View(objItem.CarregarRegistro(id));
         }
 
-        // POST: Item/Edit/5
+        // POST: Colaborador/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(Item formulario)
         {
-            try
-            {
-                // TODO: Add update logic here
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            // TODO: Add update logic here
+
+            formulario.AtualizarRegistro();
+            return RedirectToAction("Index");
+
         }
 
         // GET: Item/Delete/5

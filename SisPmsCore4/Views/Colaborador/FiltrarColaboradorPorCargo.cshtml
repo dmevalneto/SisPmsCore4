@@ -9,15 +9,18 @@
         <thead>
             <tr>
                 <th>
+                    Código
+                </th>
+                <th>
+                    Setor
+                </th>
+                <th>
                     @*@Html.DisplayNameFor(model => model.Nome)*@
                     Nome
                 </th>
                 <th>
                     @*@Html.DisplayNameFor(model => model.NomeSe)*@
                     Cargo
-                </th>
-                <th>
-                    Setor
                 </th>
             </tr>
         </thead>
@@ -26,14 +29,18 @@
             {
             <tr>
                 <td>
+                    @Html.DisplayFor(modelItem => item.CodigoSe)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomeSe)
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.Nome)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.NomeCargo)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NomeSe)
-                </td>
+
             </tr>
             }
         </tbody>
