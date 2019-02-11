@@ -14,32 +14,16 @@
         <thead>
             <tr>
                 <th>
+                    @Html.DisplayNameFor(model => model.idManutencao)
+                </th>
+                <th>
                     @Html.DisplayNameFor(model => model.NomeSe)
                 </th>
-                @*<th>
-                        @Html.DisplayNameFor(model => model.idManutencao)
-                    </th>*@
-                <th>
-                    @Html.DisplayNameFor(model => model.Observacao)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Quantidade)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Prioridade)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Data)
-                </th>
-
                 <th>
                     @Html.DisplayNameFor(model => model.NomeItem)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Os)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.DataAtendida)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Status)
@@ -49,39 +33,23 @@
         <tbody>
             @foreach (var item in (List<Manutencao>)ViewBag.FiltrarManutencaoPorSetorPorStatus)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.NomeSe)
-                    </td>
-                    @*<td>
-                            @Html.DisplayFor(modelItem => item.idManutencao)
-                        </td>*@
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Observacao)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Quantidade)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Prioridade)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Data)
-                    </td>
-
-                    <td>
-                        @Html.DisplayFor(modelItem => item.NomeItem)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Os)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DataAtendida)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Status)
-                    </td>
-                </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.idManutencao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomeSe)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomeItem)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Os)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+            </tr>
             }
         </tbody>
     </table>

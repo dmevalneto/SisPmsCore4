@@ -122,19 +122,19 @@ namespace SisPmsCore4.Models
             Manutencao item;
 
             string id_usuario_logado = HttpContextAccessor.HttpContext.Session.GetString("IdUsuarioLogado");
+
             string sql = " select " +
-                " manutencao.idmanutencao, manutencao.observacao, manutencao.quantidade, manutencao.prioridade, manutencao.data, manutencao.setor_idsetor, manutencao.item_iditem," +
+                " manutencao.idmanutencao, manutencao.flg, manutencao.data as DataSolicitada," +
                 " setor.nome as NomeSe," +
                 " item.nome as NomeItem," +
-                " historico_manutencao.os, historico_manutencao.data as DataAtendida," +
-                " status_manutencao.nome as Status " +
+                " historico_manutencao.idhistorico_manutencao, historico_manutencao.os, historico_manutencao.status_manutencao_idstatus_manutencao, historico_manutencao.data as DataAtendida," +
+                " status_manutencao.nome as NomeStatus" +
                 " from manutencao" +
                 " inner join setor on manutencao.setor_idsetor = setor.idsetor" +
                 " inner join item on manutencao.item_iditem = item.iditem" +
                 " inner join historico_manutencao on manutencao.idmanutencao = historico_manutencao.manutencao_idmanutencao" +
-                " inner join status_manutencao on historico_manutencao.status_manutencao_idstatus_manutencao = status_manutencao.idstatus_manutencao " +
-                $" where manutencao.setor_idsetor = {id} ";
-
+                " inner join status_manutencao on historico_manutencao.status_manutencao_idstatus_manutencao = status_manutencao.idstatus_manutencao" +
+                $" where setor.idsetor = {id}  group by item.nome ";
             DAL objDAL = new DAL();
             DataTable dt = objDAL.RetDataTable(sql);
 
@@ -142,17 +142,13 @@ namespace SisPmsCore4.Models
             {
                 item = new Manutencao();
                 item.idManutencao = int.Parse(dt.Rows[i]["idmanutencao"].ToString());
-                item.Observacao = dt.Rows[i]["observacao"].ToString();
-                item.Quantidade = int.Parse(dt.Rows[i]["quantidade"].ToString());
-                item.Prioridade = dt.Rows[i]["prioridade"].ToString();
-                item.Data = DateTime.Parse(dt.Rows[i]["data"].ToString()).ToString("dd/MM/yyy");
-                item.setor_idsetor = int.Parse(dt.Rows[i]["setor_idsetor"].ToString());
-                item.item_iditem = int.Parse(dt.Rows[i]["item_iditem"].ToString());
+                item.Flg = int.Parse(dt.Rows[i]["flg"].ToString());
+                item.Data = DateTime.Parse(dt.Rows[i]["DataSolicitada"].ToString()).ToString("dd/MM/yyy");
                 item.NomeSe = dt.Rows[i]["NomeSe"].ToString();
                 item.NomeItem = dt.Rows[i]["NomeItem"].ToString();
                 item.Os = dt.Rows[i]["os"].ToString();
                 item.DataAtendida = DateTime.Parse(dt.Rows[i]["DataAtendida"].ToString()).ToString("dd/MM/yyy");
-                item.Status = dt.Rows[i]["Status"].ToString();
+                item.Status = dt.Rows[i]["NomeStatus"].ToString();
                 lista.Add(item);
             }
             return lista;
@@ -166,17 +162,17 @@ namespace SisPmsCore4.Models
 
             string id_usuario_logado = HttpContextAccessor.HttpContext.Session.GetString("IdUsuarioLogado");
             string sql = " select " +
-                " manutencao.idmanutencao, manutencao.observacao, manutencao.quantidade, manutencao.prioridade, manutencao.data, manutencao.setor_idsetor, manutencao.item_iditem," +
+                " manutencao.idmanutencao, manutencao.observacao, manutencao.quantidade, manutencao.prioridade, manutencao.data, manutencao.flg, manutencao.setor_idsetor, manutencao.item_iditem," +
                 " setor.nome as NomeSe," +
                 " item.nome as NomeItem," +
-                " historico_manutencao.os, historico_manutencao.data as DataAtendida," +
-                " status_manutencao.nome as Status " +
+                " historico_manutencao.status_manutencao_idstatus_manutencao, historico_manutencao.data as DataAtendida, historico_manutencao.os," +
+                " status_manutencao.nome as Status" +
                 " from manutencao" +
-                " inner join setor on manutencao.setor_idsetor = setor.idsetor" +
-                " inner join item on manutencao.item_iditem = item.iditem" +
-                " inner join historico_manutencao on manutencao.idmanutencao = historico_manutencao.manutencao_idmanutencao" +
-                " inner join status_manutencao on historico_manutencao.status_manutencao_idstatus_manutencao = status_manutencao.idstatus_manutencao " +
-                $" where manutencao.setor_idsetor = {id} and   manutencao.flg = {idStatus}";
+                " inner join setor on manutencao.setor_idsetor = setor.idsetor " +
+                " inner join item on manutencao.item_iditem = item.iditem " +
+                " inner join status_manutencao on manutencao.flg = status_manutencao.idstatus_manutencao " +
+                " inner join historico_manutencao on manutencao.idmanutencao = historico_manutencao.manutencao_idmanutencao " +
+                $" where manutencao.flg = {idStatus} and manutencao.setor_idsetor = {id} and historico_manutencao.status_manutencao_idstatus_manutencao = {idStatus} ";
 
             DAL objDAL = new DAL();
             DataTable dt = objDAL.RetDataTable(sql);

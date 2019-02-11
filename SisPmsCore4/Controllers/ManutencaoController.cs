@@ -107,10 +107,7 @@ namespace SisPmsCore4.Controllers
             objHistorico.AtualizarFlgManutencao();
             return RedirectToAction("ListarHistoricoManutencao");
         }
-
-
-      
-
+        
 
         [HttpGet]
         public IActionResult NovaOs(int id, int idmanut)
